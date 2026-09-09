@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Propuesta de servicios de Muta Studio: estrategia, contenido, fotografía, video, Meta Ads y diseño gráfico.">
     <title>Propuesta de Servicios — Muta Studio</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,17 +15,24 @@
             --bg: #050505;
             --card: #080808;
             --card-light: #0f0f0f;
+
             --accent: #00D2D3;
             --accent-dark: #00A8A8;
             --accent-glow: rgba(0, 210, 211, 0.12);
+
             --beige: #C8B89A;
             --beige-muted: rgba(200, 184, 154, 0.12);
+
             --text: #ffffff;
-            --text-secondary: #a0a0a0;
-            --text-muted: #555555;
+            --text-secondary: #b8b8b8;
+            --text-muted: #707070;
+
             --border: #141414;
             --danger: #ff4444;
             --success: #00D2D3;
+
+            --header-height: 74px;
+            --scroll-offset: 92px;
         }
 
         * {
@@ -35,6 +43,7 @@
 
         html {
             scroll-behavior: smooth;
+            scroll-padding-top: var(--scroll-offset);
         }
 
         body {
@@ -100,6 +109,15 @@
         }
 
         /* =========================
+           ACCESIBILIDAD
+        ========================= */
+
+        :focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 4px;
+        }
+
+        /* =========================
            HEADER
         ========================= */
 
@@ -108,6 +126,7 @@
             top: 0;
             left: 0;
             width: 100%;
+            min-height: var(--header-height);
             z-index: 999;
             display: flex;
             align-items: center;
@@ -119,10 +138,17 @@
             border-bottom: 1px solid var(--border);
         }
 
+        .fixed-header .logo-header {
+            display: inline-flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
         .fixed-header .logo-header img {
             width: 120px;
             height: auto;
             filter: brightness(1.1);
+            display: block;
         }
 
         .whatsapp-btn {
@@ -154,6 +180,7 @@
         .whatsapp-btn svg {
             width: 20px;
             height: 20px;
+            flex-shrink: 0;
         }
 
         /* =========================
@@ -172,8 +199,11 @@
         }
 
         .nav-dot {
+            appearance: none;
+            -webkit-appearance: none;
             width: 10px;
             height: 10px;
+            padding: 0;
             border-radius: 50%;
             background: transparent;
             cursor: pointer;
@@ -207,7 +237,9 @@
             position: relative;
             opacity: 0;
             transform: translateY(40px);
-            transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
+            transition: opacity 1s cubic-bezier(0.22, 1, 0.36, 1),
+                        transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+            scroll-margin-top: var(--scroll-offset);
             z-index: 1;
         }
 
@@ -256,6 +288,7 @@
             display: flex;
             align-items: center;
             gap: 20px;
+            min-width: 0;
         }
 
         .slide-number {
@@ -289,13 +322,14 @@
         }
 
         .slide-header-desc {
-            font-family: 'Cormorant Garamond', serif;
+            font-family: 'Inter', sans-serif;
             font-size: 16px;
+            font-weight: 400;
             color: var(--text-secondary);
-            margin-top: 6px;
+            margin-top: 7px;
             max-width: 560px;
-            line-height: 1.4;
-            font-style: italic;
+            line-height: 1.5;
+            font-style: normal;
         }
 
         .price-tag {
@@ -307,7 +341,7 @@
             font-weight: 700;
             font-size: 20px;
             display: flex;
-            align-items: center;
+            align-items: baseline;
             gap: 10px;
             white-space: nowrap;
             border: none;
@@ -381,6 +415,8 @@
             color: var(--accent);
             border: 1px solid rgba(0, 210, 211, 0.2);
             flex-shrink: 0;
+            font-size: 18px;
+            font-weight: 700;
         }
 
         .card-title .icon-circle svg {
@@ -397,9 +433,11 @@
             align-items: flex-start;
             gap: 14px;
             padding: 12px 0;
-            font-size: 15px;
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            font-weight: 400;
             color: var(--text-secondary);
-            line-height: 1.6;
+            line-height: 1.58;
             border-bottom: 1px solid var(--border);
         }
 
@@ -412,21 +450,27 @@
             font-weight: 600;
         }
 
-        .feature-list li .check-icon {
+        .feature-list li .check-icon,
+        .feature-list li .cross-icon {
             width: 22px;
             height: 22px;
-            color: var(--accent);
             flex-shrink: 0;
             margin-top: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        .feature-list li .check-icon {
+            color: var(--accent);
             filter: drop-shadow(0 0 4px rgba(0, 210, 211, 0.3));
         }
 
         .feature-list li .cross-icon {
-            width: 22px;
-            height: 22px;
             color: var(--danger);
-            flex-shrink: 0;
-            margin-top: 2px;
         }
 
         .two-col {
@@ -444,7 +488,13 @@
             text-align: center;
             min-height: 100svh;
             height: 100svh;
-            padding: 100px 24px 40px;
+
+            /*
+             * Se agrega espacio superior adicional para que el centro
+             * visual del Hero quede por debajo del header fijo.
+             */
+            padding: calc(100px + (var(--header-height) / 2)) 24px 40px;
+
             display: flex;
             align-items: center;
             justify-content: center;
@@ -458,7 +508,12 @@
             align-items: center;
             max-width: 1200px;
             width: 100%;
-            min-height: calc(100svh - 140px);
+
+            /*
+             * El contenido ahora se centra en el espacio visual
+             * disponible debajo del header.
+             */
+            min-height: calc(100svh - var(--header-height) - 80px);
         }
 
         .hero-claim {
@@ -489,13 +544,14 @@
         }
 
         .hero-subtitle {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(17px, 2vw, 22px);
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(17px, 2vw, 21px);
+            font-weight: 400;
             color: var(--text-secondary);
             max-width: 680px;
             margin: 0 auto clamp(28px, 5vh, 56px);
-            line-height: 1.45;
-            font-style: italic;
+            line-height: 1.55;
+            font-style: normal;
         }
 
         .pillars {
@@ -578,18 +634,20 @@
         }
 
         .pillar-desc {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 16px;
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            font-weight: 400;
             color: var(--text-secondary);
-            line-height: 1.4;
+            line-height: 1.45;
         }
 
         .hero-footer {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 16px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 400;
             color: var(--text-muted);
             margin-top: 0;
-            font-style: italic;
+            line-height: 1.45;
         }
 
         .scroll-hint {
@@ -655,24 +713,27 @@
         }
 
         .highlight-box p {
-            font-family: 'Cormorant Garamond', serif;
+            font-family: 'Inter', sans-serif;
             font-size: 16px;
+            font-weight: 400;
             color: var(--text-secondary);
-            line-height: 1.5;
+            line-height: 1.55;
         }
 
         .separator-note {
             text-align: center;
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 15px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 400;
             color: var(--text-muted);
             font-style: italic;
+            line-height: 1.5;
             margin: 20px 0;
             padding: 16px;
             border-radius: 2px 12px 2px 12px;
             background: var(--card);
             border: 1px dashed var(--border);
-            letter-spacing: 0.5px;
+            letter-spacing: 0.2px;
         }
 
         /* =========================
@@ -708,6 +769,8 @@
             color: var(--accent);
             background: rgba(0, 210, 211, 0.06);
             transition: all 0.3s ease;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
         }
 
         .process-step:hover .process-step-icon {
@@ -791,10 +854,11 @@
         }
 
         .benefit-desc {
-            font-family: 'Cormorant Garamond', serif;
+            font-family: 'Inter', sans-serif;
             font-size: 14px;
+            font-weight: 400;
             color: var(--text-muted);
-            line-height: 1.4;
+            line-height: 1.45;
         }
 
         /* =========================
@@ -812,15 +876,16 @@
         }
 
         .section-center-title p {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 18px;
+            font-family: 'Inter', sans-serif;
+            font-size: 17px;
+            font-weight: 400;
             color: var(--text-secondary);
-            margin-top: 12px;
-            font-style: italic;
+            margin-top: 14px;
+            line-height: 1.55;
         }
 
         /* =========================
-           NUEVA SECCION DISEÑO
+           DISEÑO GRAFICO
         ========================= */
 
         .design-services {
@@ -886,19 +951,21 @@
         }
 
         .design-service-text {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 16px;
-            line-height: 1.4;
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            font-weight: 400;
+            line-height: 1.5;
             color: var(--text-secondary);
         }
 
         .design-footer {
             margin-top: 26px;
             text-align: center;
-            font-family: 'Cormorant Garamond', serif;
+            font-family: 'Inter', sans-serif;
             font-style: italic;
             color: var(--text-muted);
-            font-size: 16px;
+            font-size: 15px;
+            line-height: 1.5;
         }
 
         /* =========================
@@ -939,19 +1006,20 @@
         }
 
         .closing-text {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 22px;
+            font-family: 'Inter', sans-serif;
+            font-size: 19px;
+            font-weight: 400;
             color: var(--text-secondary);
             max-width: 560px;
             margin: 0 auto 24px;
-            line-height: 1.5;
-            font-style: italic;
+            line-height: 1.55;
         }
 
         .closing-footer {
             font-family: 'Inter', sans-serif;
             font-size: 15px;
             color: var(--text-muted);
+            line-height: 1.5;
         }
 
         .closing-footer strong {
@@ -1019,6 +1087,55 @@
            TABLET
         ========================= */
 
+        @media (max-width: 1000px) {
+
+            :root {
+                --header-height: 70px;
+                --scroll-offset: 86px;
+            }
+
+            .fixed-header {
+                padding: 14px 24px;
+            }
+
+            .slide {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .hero-slide {
+                padding-top: calc(100px + (var(--header-height) / 2));
+            }
+
+            .hero-slide .slide-container {
+                min-height: calc(100svh - var(--header-height) - 80px);
+            }
+
+            .slide-header-bar {
+                padding: 20px 22px;
+            }
+
+            .two-col {
+                gap: 18px;
+            }
+
+            .feature-list li {
+                font-size: 15.5px;
+            }
+
+            .design-services {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .benefits-grid {
+                gap: 14px;
+            }
+
+            .nav-dots {
+                right: 14px;
+            }
+        }
+
         @media (max-width: 900px) {
 
             .hero-title {
@@ -1036,14 +1153,6 @@
             .pillar-name {
                 font-size: 16px;
             }
-
-            .design-services {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .nav-dots {
-                right: 12px;
-            }
         }
 
         /* =========================
@@ -1052,7 +1161,13 @@
 
         @media (max-width: 768px) {
 
+            :root {
+                --header-height: 62px;
+                --scroll-offset: 78px;
+            }
+
             .fixed-header {
+                min-height: var(--header-height);
                 padding: 11px 16px;
             }
 
@@ -1077,6 +1192,7 @@
                 min-height: auto;
                 padding: 95px 16px 60px;
                 align-items: flex-start;
+                scroll-margin-top: var(--scroll-offset);
             }
 
             .slide-container {
@@ -1089,6 +1205,11 @@
             .hero-slide {
                 height: 100svh;
                 min-height: 100svh;
+
+                /*
+                 * Se mantiene el comportamiento original de mobile,
+                 * ya que visualmente funciona correctamente.
+                 */
                 padding: 82px 16px 45px;
             }
 
@@ -1112,7 +1233,7 @@
 
             .hero-subtitle {
                 font-size: 18px;
-                line-height: 1.35;
+                line-height: 1.45;
                 max-width: 94%;
                 margin-bottom: 26px;
             }
@@ -1154,13 +1275,14 @@
             }
 
             .pillar-desc {
+                font-family: 'Inter', sans-serif;
                 font-size: 14px;
-                line-height: 1.25;
+                line-height: 1.3;
             }
 
             .hero-footer {
                 font-size: 14px;
-                line-height: 1.3;
+                line-height: 1.4;
                 max-width: 90%;
             }
 
@@ -1192,7 +1314,9 @@
             }
 
             .slide-header-desc {
+                font-family: 'Inter', sans-serif;
                 font-size: 15px;
+                line-height: 1.45;
                 max-width: 100%;
                 padding-right: 4px;
             }
@@ -1216,8 +1340,9 @@
             }
 
             .feature-list li {
-                font-size: 14px;
-                line-height: 1.5;
+                font-family: 'Inter', sans-serif;
+                font-size: 14.5px;
+                line-height: 1.52;
                 gap: 10px;
             }
 
@@ -1225,6 +1350,7 @@
             .feature-list li .cross-icon {
                 width: 19px;
                 height: 19px;
+                font-size: 13px;
             }
 
             .highlight-box {
@@ -1233,12 +1359,15 @@
             }
 
             .highlight-box p {
+                font-family: 'Inter', sans-serif;
                 font-size: 15px;
+                line-height: 1.5;
             }
 
             .separator-note {
+                font-family: 'Inter', sans-serif;
                 font-size: 14px;
-                line-height: 1.4;
+                line-height: 1.45;
                 padding: 13px;
             }
 
@@ -1253,7 +1382,9 @@
             }
 
             .section-center-title p {
-                font-size: 17px;
+                font-family: 'Inter', sans-serif;
+                font-size: 16px;
+                line-height: 1.5;
             }
 
             .process-flow {
@@ -1295,7 +1426,9 @@
             }
 
             .benefit-desc {
+                font-family: 'Inter', sans-serif;
                 font-size: 13px;
+                line-height: 1.4;
             }
 
             /* DISEÑO */
@@ -1326,10 +1459,13 @@
             }
 
             .design-service-text {
+                font-family: 'Inter', sans-serif;
                 font-size: 15px;
+                line-height: 1.45;
             }
 
             .design-footer {
+                font-family: 'Inter', sans-serif;
                 font-size: 15px;
                 margin-top: 20px;
             }
@@ -1353,7 +1489,9 @@
             }
 
             .closing-text {
-                font-size: 19px;
+                font-family: 'Inter', sans-serif;
+                font-size: 18px;
+                line-height: 1.5;
                 max-width: 95%;
             }
 
@@ -1409,30 +1547,80 @@
                 font-size: 14px;
             }
         }
-    </style>
 
-    <base target="_blank">
+        /* =========================
+           REDUCIR MOVIMIENTO
+        ========================= */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            html {
+                scroll-behavior: auto;
+            }
+
+            .slide {
+                transition: opacity 0.2s ease;
+                transform: none;
+            }
+
+            .slide.visible {
+                transform: none;
+            }
+
+            .pillar-card,
+            .card,
+            .design-service,
+            .benefit-item,
+            .whatsapp-btn,
+            .closing-cta a {
+                transition: none;
+            }
+
+            .scroll-hint {
+                animation: none;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
     <!-- DECORACION -->
 
-    <div class="deco-block turq a"></div>
-    <div class="deco-block beige b"></div>
-    <div class="deco-block turq c"></div>
+    <div class="deco-block turq a" aria-hidden="true"></div>
+    <div class="deco-block beige b" aria-hidden="true"></div>
+    <div class="deco-block turq c" aria-hidden="true"></div>
+
 
     <!-- HEADER -->
 
     <header class="fixed-header">
 
-        <a href="#slide-0" class="logo-header" onclick="scrollToSlide(0); return false;">
-            <img src="https://www.image2url.com/r2/default/images/1787771817769-53286863-4e16-433a-9c37-5c8d3158dfba.png" alt="Logo MUTA">
+        <a
+            href="#slide-0"
+            class="logo-header"
+            onclick="scrollToSlide(0); return false;"
+            aria-label="Volver al inicio de MUTA"
+        >
+            <img
+                src="https://www.image2url.com/r2/default/images/1787771817769-53286863-4e16-433a-9c37-5c8d3158dfba.png"
+                alt="Logo MUTA"
+            >
         </a>
 
-        <a href="https://wa.me/5492324630746" target="_blank" class="whatsapp-btn">
+        <a
+            href="https://wa.me/5492324630746"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="whatsapp-btn"
+            aria-label="Escribinos por WhatsApp"
+        >
 
-            <svg viewBox="0 0 24 24" fill="currentColor">
+            <svg
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                aria-hidden="true"
+            >
                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.247-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
             </svg>
 
@@ -1445,18 +1633,18 @@
 
     <!-- NAVEGACION -->
 
-    <div class="nav-dots">
+    <nav class="nav-dots" aria-label="Navegación de secciones">
 
-        <div class="nav-dot active" onclick="scrollToSlide(0)"></div>
-        <div class="nav-dot" onclick="scrollToSlide(1)"></div>
-        <div class="nav-dot" onclick="scrollToSlide(2)"></div>
-        <div class="nav-dot" onclick="scrollToSlide(3)"></div>
-        <div class="nav-dot" onclick="scrollToSlide(4)"></div>
-        <div class="nav-dot" onclick="scrollToSlide(5)"></div>
-        <div class="nav-dot" onclick="scrollToSlide(6)"></div>
-        <div class="nav-dot" onclick="scrollToSlide(7)"></div>
+        <button class="nav-dot active" onclick="scrollToSlide(0)" aria-label="Ir a inicio" aria-current="true"></button>
+        <button class="nav-dot" onclick="scrollToSlide(1)" aria-label="Ir a Plan Presencia"></button>
+        <button class="nav-dot" onclick="scrollToSlide(2)" aria-label="Ir a Plan Foto y Video"></button>
+        <button class="nav-dot" onclick="scrollToSlide(3)" aria-label="Ir a Meta Ads — 1 Campaña"></button>
+        <button class="nav-dot" onclick="scrollToSlide(4)" aria-label="Ir a Meta Ads — Hasta 3 Campañas"></button>
+        <button class="nav-dot" onclick="scrollToSlide(5)" aria-label="Ir a Cómo funcionan los servicios"></button>
+        <button class="nav-dot" onclick="scrollToSlide(6)" aria-label="Ir a Diseño gráfico"></button>
+        <button class="nav-dot" onclick="scrollToSlide(7)" aria-label="Ir al cierre"></button>
 
-    </div>
+    </nav>
 
 
     <!-- =========================
@@ -1464,8 +1652,6 @@
     ========================= -->
 
     <section class="slide hero-slide" id="slide-0">
-
- <!--       <div class="muta-watermark hero">m</div> -->
 
         <div class="slide-container">
 
@@ -1491,7 +1677,7 @@
                 <a href="#slide-1" class="pillar-card" onclick="scrollToSlide(1); return false;">
 
                     <div class="pillar-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                             <rect x="2" y="3" width="20" height="14" rx="2"></rect>
                             <line x1="8" y1="21" x2="16" y2="21"></line>
                             <line x1="12" y1="17" x2="12" y2="21"></line>
@@ -1514,7 +1700,7 @@
                 <a href="#slide-2" class="pillar-card" onclick="scrollToSlide(2); return false;">
 
                     <div class="pillar-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                             <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
                             <circle cx="12" cy="13" r="4"></circle>
                         </svg>
@@ -1536,7 +1722,7 @@
                 <a href="#slide-3" class="pillar-card" onclick="scrollToSlide(3); return false;">
 
                     <div class="pillar-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                             <circle cx="12" cy="12" r="10"></circle>
                             <line x1="2" y1="12" x2="22" y2="12"></line>
                             <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
@@ -1559,7 +1745,7 @@
                 Cada servicio es independiente. Contratá solo el que necesites o sumalos entre sí.
             </div>
 
-            <div class="scroll-hint">
+            <div class="scroll-hint" aria-hidden="true">
                 <span>Desplazá para descubrir</span>
 
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1794,8 +1980,8 @@
                     <li>
                         <span class="check-icon">✓</span>
                         <div>
-                            <strong>Reposición durante el mes</strong>:
-                            una segunda visita para novedades, eventos o stock nuevo.
+                            <strong>Segunda visita durante el mes</strong>:
+                            se contempla si se considera necesaria.
                         </div>
                     </li>
 
@@ -1882,17 +2068,47 @@
 
                     <ul class="feature-list">
 
-                        <li><span class="check-icon">✓</span><div><strong>Reunión estratégica</strong> para definir el objetivo.</div></li>
+                        <li>
+                            <span class="check-icon">✓</span>
+                            <div>
+                                <strong>Reunión estratégica</strong> para definir el objetivo.
+                            </div>
+                        </li>
 
-                        <li><span class="check-icon">✓</span><div><strong>Desarrollo del creativo</strong>: placa, carrusel o video.</div></li>
+                        <li>
+                            <span class="check-icon">✓</span>
+                            <div>
+                                <strong>Desarrollo del creativo</strong>: placa, carrusel o video.
+                            </div>
+                        </li>
 
-                        <li><span class="check-icon">✓</span><div><strong>Configuración completa</strong> de la campaña.</div></li>
+                        <li>
+                            <span class="check-icon">✓</span>
+                            <div>
+                                <strong>Configuración completa</strong> de la campaña.
+                            </div>
+                        </li>
 
-                        <li><span class="check-icon">✓</span><div><strong>Segmentación del público</strong> ideal.</div></li>
+                        <li>
+                            <span class="check-icon">✓</span>
+                            <div>
+                                <strong>Segmentación del público</strong> ideal.
+                            </div>
+                        </li>
 
-                        <li><span class="check-icon">✓</span><div><strong>Optimización y ajustes</strong> durante el período.</div></li>
+                        <li>
+                            <span class="check-icon">✓</span>
+                            <div>
+                                <strong>Optimización y ajustes</strong> durante el período.
+                            </div>
+                        </li>
 
-                        <li><span class="check-icon">✓</span><div><strong>Informes y resultados</strong> con recomendaciones.</div></li>
+                        <li>
+                            <span class="check-icon">✓</span>
+                            <div>
+                                <strong>Informes y resultados</strong> con recomendaciones.
+                            </div>
+                        </li>
 
                     </ul>
 
@@ -1904,10 +2120,13 @@
                     <div class="card">
 
                         <div class="card-title">
+
                             <div class="icon-circle" style="background: rgba(255,68,68,0.08); color: var(--danger); border-color: rgba(255,68,68,0.2);">
                                 ×
                             </div>
+
                             No incluye
+
                         </div>
 
                         <ul class="feature-list">
@@ -1992,23 +2211,58 @@
                 <div class="card">
 
                     <div class="card-title">
-                        <div class="icon-circle">✓</div>
+
+                        <div class="icon-circle">
+                            ✓
+                        </div>
+
                         ¿Qué incluye?
+
                     </div>
 
                     <ul class="feature-list">
 
-                        <li><span class="check-icon">✓</span><div><strong>Reunión estratégica</strong> para cada campaña.</div></li>
+                        <li>
+                            <span class="check-icon">✓</span>
+                            <div>
+                                <strong>Reunión estratégica</strong> para cada campaña.
+                            </div>
+                        </li>
 
-                        <li><span class="check-icon">✓</span><div><strong>Desarrollo de creativos</strong> para cada objetivo.</div></li>
+                        <li>
+                            <span class="check-icon">✓</span>
+                            <div>
+                                <strong>Desarrollo de creativos</strong> para cada objetivo.
+                            </div>
+                        </li>
 
-                        <li><span class="check-icon">✓</span><div><strong>Configuración completa</strong> de cada campaña.</div></li>
+                        <li>
+                            <span class="check-icon">✓</span>
+                            <div>
+                                <strong>Configuración completa</strong> de cada campaña.
+                            </div>
+                        </li>
 
-                        <li><span class="check-icon">✓</span><div><strong>Segmentación del público</strong> específico.</div></li>
+                        <li>
+                            <span class="check-icon">✓</span>
+                            <div>
+                                <strong>Segmentación del público</strong> específico.
+                            </div>
+                        </li>
 
-                        <li><span class="check-icon">✓</span><div><strong>Optimización y ajustes</strong> constantes.</div></li>
+                        <li>
+                            <span class="check-icon">✓</span>
+                            <div>
+                                <strong>Optimización y ajustes</strong> constantes.
+                            </div>
+                        </li>
 
-                        <li><span class="check-icon">✓</span><div><strong>Informes y resultados</strong> cada 15 días.</div></li>
+                        <li>
+                            <span class="check-icon">✓</span>
+                            <div>
+                                <strong>Informes y resultados</strong> al finalizar la campaña.
+                            </div>
+                        </li>
 
                     </ul>
 
@@ -2020,10 +2274,13 @@
                     <div class="card">
 
                         <div class="card-title">
+
                             <div class="icon-circle" style="background: rgba(255,68,68,0.08); color: var(--danger); border-color: rgba(255,68,68,0.2);">
                                 ×
                             </div>
+
                             No incluye
+
                         </div>
 
                         <ul class="feature-list">
@@ -2101,7 +2358,7 @@
 
                 </div>
 
-                <div class="process-arrow">→</div>
+                <div class="process-arrow" aria-hidden="true">→</div>
 
                 <div class="process-step">
 
@@ -2115,7 +2372,7 @@
 
                 </div>
 
-                <div class="process-arrow">→</div>
+                <div class="process-arrow" aria-hidden="true">→</div>
 
                 <div class="process-step">
 
@@ -2129,7 +2386,7 @@
 
                 </div>
 
-                <div class="process-arrow">→</div>
+                <div class="process-arrow" aria-hidden="true">→</div>
 
                 <div class="process-step">
 
@@ -2146,11 +2403,19 @@
             </div>
 
 
-            <div class="card" style="background: rgba(0, 210, 211, 0.03); border-color: rgba(0, 210, 211, 0.15);">
+            <div
+                class="card"
+                style="background: rgba(0, 210, 211, 0.03); border-color: rgba(0, 210, 211, 0.15);"
+            >
 
                 <div class="card-title">
-                    <div class="icon-circle">!</div>
+
+                    <div class="icon-circle">
+                        !
+                    </div>
+
                     Reglas claras
+
                 </div>
 
                 <ul class="feature-list">
@@ -2184,16 +2449,38 @@
             <div class="card" style="margin-top: 24px;">
 
                 <div class="card-title" style="justify-content: center;">
-                    <div class="icon-circle">★</div>
+
+                    <div class="icon-circle">
+                        ★
+                    </div>
+
                     Beneficios para tu negocio
+
                 </div>
 
 
                 <div class="benefits-grid">
 
+                    <!-- BENEFICIO 1 -->
+
                     <div class="benefit-item">
 
-                        <div class="benefit-icon">◉</div>
+                        <div class="benefit-icon">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                aria-hidden="true"
+                            >
+                                <path d="M3 3v18h18"></path>
+                                <path d="M7 16l4-5 3 3 5-7"></path>
+                            </svg>
+
+                        </div>
 
                         <div class="benefit-title">
                             Más visibilidad
@@ -2206,9 +2493,28 @@
                     </div>
 
 
+                    <!-- BENEFICIO 2 -->
+
                     <div class="benefit-item">
 
-                        <div class="benefit-icon">◌</div>
+                        <div class="benefit-icon">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                aria-hidden="true"
+                            >
+                                <path d="M21 11.5a8.38 8.38 0 0 1-9 8.5 8.45 8.45 0 0 1-4-.95L3 21l1.95-4.7A8.45 8.45 0 0 1 4 12a8.5 8.5 0 0 1 8.5-8.5c4.7 0 8.5 3.6 8.5 8z"></path>
+                                <path d="M8 12h.01"></path>
+                                <path d="M12 12h.01"></path>
+                                <path d="M16 12h.01"></path>
+                            </svg>
+
+                        </div>
 
                         <div class="benefit-title">
                             Más consultas
@@ -2221,9 +2527,26 @@
                     </div>
 
 
+                    <!-- BENEFICIO 3 -->
+
                     <div class="benefit-item">
 
-                        <div class="benefit-icon">◇</div>
+                        <div class="benefit-icon">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                aria-hidden="true"
+                            >
+                                <path d="M12 3l7 4v5c0 4.8-3 7.9-7 9-4-1.1-7-4.2-7-9V7l7-4z"></path>
+                                <path d="M9 12l2 2 4-4"></path>
+                            </svg>
+
+                        </div>
 
                         <div class="benefit-title">
                             Más confianza
@@ -2236,9 +2559,26 @@
                     </div>
 
 
+                    <!-- BENEFICIO 4 -->
+
                     <div class="benefit-item">
 
-                        <div class="benefit-icon">↗</div>
+                        <div class="benefit-icon">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                aria-hidden="true"
+                            >
+                                <path d="M3 17l6-6 4 4 8-8"></path>
+                                <path d="M15 7h6v6"></path>
+                            </svg>
+
+                        </div>
 
                         <div class="benefit-title">
                             Más resultados
@@ -2287,7 +2627,7 @@
                 <div class="design-service">
 
                     <div class="design-service-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                             <path d="M12 20h9"></path>
                             <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4Z"></path>
                         </svg>
@@ -2309,7 +2649,7 @@
                 <div class="design-service">
 
                     <div class="design-service-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                             <rect x="3" y="4" width="18" height="16" rx="2"></rect>
                             <path d="M3 9h18"></path>
                             <path d="M8 4v5"></path>
@@ -2332,7 +2672,7 @@
                 <div class="design-service">
 
                     <div class="design-service-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                             <path d="M4 4h16v16H4z"></path>
                             <path d="M8 8h8"></path>
                             <path d="M8 12h8"></path>
@@ -2356,7 +2696,7 @@
                 <div class="design-service">
 
                     <div class="design-service-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                             <path d="M4 4h16v16H4z"></path>
                             <path d="M8 8h8v8H8z"></path>
                         </svg>
@@ -2378,7 +2718,7 @@
                 <div class="design-service">
 
                     <div class="design-service-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                             <path d="M6 2h12v20H6z"></path>
                             <path d="M9 6h6"></path>
                             <path d="M9 10h6"></path>
@@ -2402,7 +2742,7 @@
                 <div class="design-service">
 
                     <div class="design-service-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                             <circle cx="12" cy="12" r="9"></circle>
                             <path d="M12 7v10"></path>
                             <path d="M7 12h10"></path>
@@ -2425,7 +2765,7 @@
                 <div class="design-service">
 
                     <div class="design-service-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                             <path d="M4 4h16v16H4z"></path>
                             <path d="M8 8h8"></path>
                             <path d="M8 12h8"></path>
@@ -2449,7 +2789,7 @@
                 <div class="design-service">
 
                     <div class="design-service-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                             <rect x="3" y="3" width="18" height="18" rx="2"></rect>
                             <circle cx="8" cy="8" r="1"></circle>
                             <path d="M21 15l-5-5L5 21"></path>
@@ -2488,7 +2828,7 @@
 
             <div class="closing-icon">
 
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 
                     <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
 
@@ -2533,10 +2873,15 @@
 
             <div class="closing-cta">
 
-                <a href="https://wa.me/5492324630746" target="_blank">
+                <a
+                    href="https://wa.me/5492324630746"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Escribinos por WhatsApp"
+                >
 
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.198.298-.347.446-.52.149-.174.198-.298.247-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.247-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
                     </svg>
 
                     Escribinos por WhatsApp
@@ -2571,6 +2916,13 @@
         const slides = document.querySelectorAll('.slide');
         const dots = document.querySelectorAll('.nav-dot');
 
+
+        /*
+         * IntersectionObserver:
+         * Detecta la sección predominante y actualiza
+         * automáticamente el indicador lateral.
+         */
+
         const observer = new IntersectionObserver((entries) => {
 
             entries.forEach(entry => {
@@ -2583,10 +2935,18 @@
 
                     dots.forEach((dot, i) => {
 
+                        const isActive = i === index;
+
                         dot.classList.toggle(
                             'active',
-                            i === index
+                            isActive
                         );
+
+                        if (isActive) {
+                            dot.setAttribute('aria-current', 'true');
+                        } else {
+                            dot.removeAttribute('aria-current');
+                        }
 
                     });
 
@@ -2600,11 +2960,16 @@
 
 
         slides.forEach(slide => {
-
             observer.observe(slide);
-
         });
 
+
+        /*
+         * Navegación entre slides.
+         *
+         * scroll-margin-top en CSS evita que la sección
+         * termine escondida detrás del header fijo.
+         */
 
         function scrollToSlide(index) {
 
@@ -2612,27 +2977,42 @@
                 'slide-' + index
             );
 
-            if (slide) {
-
-                slide.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-
+            if (!slide) {
+                return;
             }
+
+            slide.scrollIntoView({
+                behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches
+                    ? 'auto'
+                    : 'smooth',
+                block: 'start'
+            });
 
         }
 
 
+        /*
+         * Navegación con teclado:
+         * Flecha abajo → siguiente slide
+         * Flecha arriba → slide anterior
+         */
+
         document.addEventListener('keydown', (e) => {
+
+            if (
+                e.key !== 'ArrowDown' &&
+                e.key !== 'ArrowUp'
+            ) {
+                return;
+            }
 
             const current = Array.from(slides).findIndex(s => {
 
                 const rect = s.getBoundingClientRect();
 
                 return (
-                    rect.top >= -100 &&
-                    rect.top <= 200
+                    rect.top >= -120 &&
+                    rect.top <= 220
                 );
 
             });
@@ -2640,8 +3020,11 @@
 
             if (
                 e.key === 'ArrowDown' &&
+                current >= 0 &&
                 current < slides.length - 1
             ) {
+
+                e.preventDefault();
 
                 scrollToSlide(current + 1);
 
@@ -2653,11 +3036,59 @@
                 current > 0
             ) {
 
+                e.preventDefault();
+
                 scrollToSlide(current - 1);
 
             }
 
         });
+
+
+        /*
+         * Si el navegador soporta scrollend, podemos evitar
+         * comportamientos extraños durante desplazamientos rápidos.
+         */
+
+        if ('onscrollend' in window) {
+
+            window.addEventListener('scrollend', () => {
+
+                const current = Array.from(slides).findIndex(s => {
+
+                    const rect = s.getBoundingClientRect();
+
+                    return (
+                        rect.top >= -120 &&
+                        rect.top <= 220
+                    );
+
+                });
+
+                if (current >= 0) {
+
+                    dots.forEach((dot, i) => {
+
+                        const isActive = i === current;
+
+                        dot.classList.toggle(
+                            'active',
+                            isActive
+                        );
+
+                        if (isActive) {
+                            dot.setAttribute('aria-current', 'true');
+                        } else {
+                            dot.removeAttribute('aria-current');
+                        }
+
+                    });
+
+                }
+
+            });
+
+        }
 
     </script>
 
