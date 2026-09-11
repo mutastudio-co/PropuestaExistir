@@ -1,16 +1,15 @@
 <!DOCTYPE html>
+
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Propuesta de servicios de Muta Studio: estrategia, contenido, fotografía, video, Meta Ads y diseño gráfico.">
-    <title>Propuesta de Servicios — Muta Studio</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-    <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Propuesta de servicios de Muta Studio: estrategia, contenido, fotografía, video, Meta Ads y diseño gráfico." name="description"/>
+<title>Propuesta de Servicios — Muta Studio</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&amp;family=Inter:wght@400;500;600;700;800;900&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<style>
         :root {
             --bg: #050505;
             --card: #080808;
@@ -1580,1338 +1579,481 @@
                 animation: none;
             }
         }
-    </style>
+    
+        /* =========================
+           PAQUETES / CONVERSIÓN
+        ========================= */
+        .packages-grid {
+            display:grid;
+            grid-template-columns:repeat(3,1fr);
+            gap:18px;
+            margin-top:28px;
+            align-items:stretch;
+        }
+        .package-card {
+            background:var(--card);
+            border:1px solid var(--border);
+            border-radius:2px 22px 2px 22px;
+            padding:28px 24px 24px;
+            position:relative;
+            display:flex;
+            flex-direction:column;
+            min-height:100%;
+            overflow:hidden;
+        }
+        .package-card.featured {
+            border-color:rgba(0,210,211,.5);
+            box-shadow:0 18px 55px rgba(0,210,211,.07);
+            transform:translateY(-4px);
+        }
+        .package-badge {
+            position:absolute;
+            top:14px;
+            right:14px;
+            background:var(--accent);
+            color:var(--bg);
+            font-family:'Space Grotesk',sans-serif;
+            font-size:10px;
+            font-weight:800;
+            letter-spacing:1px;
+            text-transform:uppercase;
+            padding:7px 10px;
+            border-radius:2px 9px 2px 9px;
+        }
+        .package-kicker {
+            color:var(--accent);
+            font-family:'Space Grotesk',sans-serif;
+            font-size:11px;
+            font-weight:700;
+            text-transform:uppercase;
+            letter-spacing:1.5px;
+            margin-bottom:9px;
+        }
+        .package-name {
+            font-family:'Space Grotesk',sans-serif;
+            font-size:25px;
+            font-weight:700;
+            text-transform:uppercase;
+            line-height:1.05;
+            margin-bottom:10px;
+        }
+        .package-desc {
+            color:var(--text-secondary);
+            font-size:14px;
+            line-height:1.48;
+            min-height:63px;
+            margin-bottom:18px;
+        }
+        .package-price {
+            font-family:'Space Grotesk',sans-serif;
+            font-size:30px;
+            font-weight:800;
+            line-height:1;
+            margin-bottom:5px;
+        }
+        .package-price small {
+            font-family:'Inter',sans-serif;
+            font-size:12px;
+            font-weight:500;
+            color:var(--text-muted);
+        }
+        .package-saving {
+            color:var(--accent);
+            font-size:12px;
+            min-height:18px;
+            margin-bottom:16px;
+        }
+        .package-list {
+            list-style:none;
+            margin:0 0 20px;
+            padding:0;
+            border-top:1px solid var(--border);
+        }
+        .package-list li {
+            display:flex;
+            gap:9px;
+            padding:9px 0;
+            border-bottom:1px solid var(--border);
+            color:var(--text-secondary);
+            font-size:13.5px;
+            line-height:1.42;
+        }
+        .package-list li::before {
+            content:'✓';
+            color:var(--accent);
+            font-weight:800;
+            flex-shrink:0;
+        }
+        .package-note {
+            color:var(--text-muted);
+            font-size:12px;
+            line-height:1.45;
+            margin-top:auto;
+            padding-top:4px;
+        }
+        .package-cta {
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+            margin-top:18px;
+            padding:12px 15px;
+            border:1px solid var(--accent);
+            border-radius:2px 13px 2px 13px;
+            color:var(--accent);
+            text-decoration:none;
+            font-family:'Space Grotesk',sans-serif;
+            font-size:12px;
+            font-weight:700;
+            text-transform:uppercase;
+            letter-spacing:.7px;
+        }
+        .package-card.featured .package-cta {
+            background:var(--accent);
+            color:var(--bg);
+        }
+        .service-grid {
+            display:grid;
+            grid-template-columns:repeat(3,1fr);
+            gap:18px;
+            margin-top:26px;
+        }
+        .service-mini {
+            background:var(--card);
+            border:1px solid var(--border);
+            border-radius:2px 18px 2px 18px;
+            padding:22px;
+        }
+        .service-mini h3 {
+            font-family:'Space Grotesk',sans-serif;
+            font-size:17px;
+            text-transform:uppercase;
+            margin-bottom:8px;
+        }
+        .service-mini .mini-price {
+            color:var(--accent);
+            font-family:'Space Grotesk',sans-serif;
+            font-weight:800;
+            font-size:22px;
+            margin-bottom:12px;
+        }
+        .service-mini p {
+            color:var(--text-secondary);
+            font-size:14px;
+            line-height:1.5;
+        }
+        .compare-box {
+            display:grid;
+            grid-template-columns:1fr auto;
+            gap:20px;
+            align-items:center;
+            background:rgba(0,210,211,.035);
+            border:1px solid rgba(0,210,211,.18);
+            border-radius:2px 18px 2px 18px;
+            padding:22px 24px;
+            margin-top:20px;
+        }
+        .compare-box strong { color:var(--text); }
+        .compare-price {
+            font-family:'Space Grotesk',sans-serif;
+            font-size:23px;
+            font-weight:800;
+            color:var(--accent);
+            white-space:nowrap;
+        }
+        .tag {
+            display:inline-block;
+            margin-bottom:12px;
+            padding:6px 9px;
+            border:1px solid rgba(200,184,154,.25);
+            color:var(--beige);
+            font-family:'Space Grotesk',sans-serif;
+            font-size:10px;
+            text-transform:uppercase;
+            letter-spacing:1px;
+            border-radius:2px 8px 2px 8px;
+        }
+        @media (max-width:1000px) {
+            .packages-grid { grid-template-columns:1fr 1fr; }
+            .service-grid { grid-template-columns:1fr 1fr; }
+        }
+        @media (max-width:768px) {
+            .packages-grid, .service-grid { grid-template-columns:1fr; }
+            .package-card.featured { transform:none; }
+            .package-desc { min-height:auto; }
+            .compare-box { grid-template-columns:1fr; }
+            .compare-price { white-space:normal; }
+        }
+</style>
 </head>
-
 <body>
-
-    <!-- DECORACION -->
-
-    <div class="deco-block turq a" aria-hidden="true"></div>
-    <div class="deco-block beige b" aria-hidden="true"></div>
-    <div class="deco-block turq c" aria-hidden="true"></div>
-
-
-    <!-- HEADER -->
-
-    <header class="fixed-header">
-
-        <a
-            href="#slide-0"
-            class="logo-header"
-            onclick="scrollToSlide(0); return false;"
-            aria-label="Volver al inicio de MUTA"
-        >
-            <img
-                src="https://www.image2url.com/r2/default/images/1787771817769-53286863-4e16-433a-9c37-5c8d3158dfba.png"
-                alt="Logo MUTA"
-            >
-        </a>
-
-        <a
-            href="https://wa.me/5492324630746"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="whatsapp-btn"
-            aria-label="Escribinos por WhatsApp"
-        >
-
-            <svg
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                aria-hidden="true"
-            >
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.247-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-            </svg>
-
-            <span>Quiero saber más</span>
-
-        </a>
-
-    </header>
-
-
-    <!-- NAVEGACION -->
-
-    <nav class="nav-dots" aria-label="Navegación de secciones">
-
-        <button class="nav-dot active" onclick="scrollToSlide(0)" aria-label="Ir a inicio" aria-current="true"></button>
-        <button class="nav-dot" onclick="scrollToSlide(1)" aria-label="Ir a Plan Presencia"></button>
-        <button class="nav-dot" onclick="scrollToSlide(2)" aria-label="Ir a Plan Foto y Video"></button>
-        <button class="nav-dot" onclick="scrollToSlide(3)" aria-label="Ir a Meta Ads — 1 Campaña"></button>
-        <button class="nav-dot" onclick="scrollToSlide(4)" aria-label="Ir a Meta Ads — Hasta 3 Campañas"></button>
-        <button class="nav-dot" onclick="scrollToSlide(5)" aria-label="Ir a Cómo funcionan los servicios"></button>
-        <button class="nav-dot" onclick="scrollToSlide(6)" aria-label="Ir a Diseño gráfico"></button>
-        <button class="nav-dot" onclick="scrollToSlide(7)" aria-label="Ir al cierre"></button>
-
-    </nav>
-
-
-    <!-- =========================
-         SLIDE 0 — HERO
-    ========================= -->
-
-    <section class="slide hero-slide" id="slide-0">
-
-        <div class="slide-container">
-
-            <div class="hero-claim">
-                De la idea al impacto
-            </div>
-
-            <div class="hero-title">
-                Existí en redes.
-                <br>
-                <span class="accent">Crecé en el mercado.</span>
-            </div>
-
-            <div class="hero-subtitle">
-                Estrategia, contenido y publicidad profesional.
-                Elegí el servicio que necesitás o combiná los que mejor se adapten a tu objetivo.
-            </div>
-
-            <div class="pillars">
-
-                <!-- PRESENCIA -->
-
-                <a href="#slide-1" class="pillar-card" onclick="scrollToSlide(1); return false;">
-
-                    <div class="pillar-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                            <rect x="2" y="3" width="20" height="14" rx="2"></rect>
-                            <line x1="8" y1="21" x2="16" y2="21"></line>
-                            <line x1="12" y1="17" x2="12" y2="21"></line>
-                        </svg>
-                    </div>
-
-                    <div class="pillar-name">
-                        Presencia en redes
-                    </div>
-
-                    <div class="pillar-desc">
-                        Perfil profesional y contenido mensual
-                    </div>
-
-                </a>
-
-
-                <!-- FOTO VIDEO -->
-
-                <a href="#slide-2" class="pillar-card" onclick="scrollToSlide(2); return false;">
-
-                    <div class="pillar-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
-                            <circle cx="12" cy="13" r="4"></circle>
-                        </svg>
-                    </div>
-
-                    <div class="pillar-name">
-                        Foto y video
-                    </div>
-
-                    <div class="pillar-desc">
-                        Material del local para trabajar
-                    </div>
-
-                </a>
-
-
-                <!-- CAMPAÑAS -->
-
-                <a href="#slide-3" class="pillar-card" onclick="scrollToSlide(3); return false;">
-
-                    <div class="pillar-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <line x1="2" y1="12" x2="22" y2="12"></line>
-                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-                        </svg>
-                    </div>
-
-                    <div class="pillar-name">
-                        Campañas Meta Ads
-                    </div>
-
-                    <div class="pillar-desc">
-                        Publicidad segmentada que genera consultas
-                    </div>
-
-                </a>
-
-            </div>
-
-            <div class="hero-footer">
-                Cada servicio es independiente. Contratá solo el que necesites o sumalos entre sí.
-            </div>
-
-            <div class="scroll-hint" aria-hidden="true">
-                <span>Desplazá para descubrir</span>
-
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="6 9 12 15 18 9"></polyline>
-                </svg>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =========================
-         SLIDE 1 — PRESENCIA
-    ========================= -->
-
-    <section class="slide" id="slide-1">
-
-        <div class="slide-container">
-
-            <div class="slide-header-bar">
-
-                <div class="slide-header-left">
-
-                    <div class="slide-number">
-                        1
-                    </div>
-
-                    <div>
-
-                        <div class="slide-header-title">
-                            Plan <span>Presencia</span>
-                        </div>
-
-                        <div class="slide-header-desc">
-                            Ideal para negocios que quieren verse profesionales y mantener actividad constante en sus redes.
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="price-tag">
-                    $150.000 <small>/ mes</small>
-                </div>
-
-            </div>
-
-
-            <div class="two-col">
-
-                <div class="card">
-
-                    <div class="card-title">
-
-                        <div class="icon-circle">
-                            ✓
-                        </div>
-
-                        ¿Qué incluye?
-
-                    </div>
-
-                    <ul class="feature-list">
-
-                        <li>
-                            <span class="check-icon">✓</span>
-                            <div>
-                                <strong>4 publicaciones mensuales</strong>
-                                en feed. Al menos 1 carrusel para generar mayor impacto y alcance.
-                            </div>
-                        </li>
-
-                        <li>
-                            <span class="check-icon">✓</span>
-                            <div>
-                                <strong>8 historias mensuales</strong>
-                                con horarios, contacto, ubicación, ofertas o novedades.
-                            </div>
-                        </li>
-
-                        <li>
-                            <span class="check-icon">✓</span>
-                            <div>
-                                <strong>Diseño profesional</strong>
-                                de publicaciones e historias alineadas a tu marca.
-                            </div>
-                        </li>
-
-                        <li>
-                            <span class="check-icon">✓</span>
-                            <div>
-                                <strong>Calendario mensual</strong>
-                                de planificación estratégica de contenidos.
-                            </div>
-                        </li>
-
-                        <li>
-                            <span class="check-icon">✓</span>
-                            <div>
-                                <strong>Mantenimiento del perfil</strong>:
-                                información, destacadas y datos importantes.
-                            </div>
-                        </li>
-
-                        <li>
-                            <span class="check-icon">✓</span>
-                            <div>
-                                <strong>Facebook si aplica</strong>:
-                                armado de portada y gestión de la página.
-                            </div>
-                        </li>
-
-                    </ul>
-
-                </div>
-
-
-                <div class="card">
-
-                    <div class="card-title">
-
-                        <div class="icon-circle" style="background: rgba(255,68,68,0.08); color: var(--danger); border-color: rgba(255,68,68,0.2);">
-                            ×
-                        </div>
-
-                        No incluye
-
-                    </div>
-
-                    <ul class="feature-list">
-
-                        <li>
-                            <span class="cross-icon">×</span>
-                            <div>Gestión de campañas publicitarias Meta Ads.</div>
-                        </li>
-
-                        <li>
-                            <span class="cross-icon">×</span>
-                            <div>Producción fotográfica o audiovisual profesional.</div>
-                        </li>
-
-                        <li>
-                            <span class="cross-icon">×</span>
-                            <div>Respuesta de mensajes o atención al cliente.</div>
-                        </li>
-
-                        <li>
-                            <span class="cross-icon">×</span>
-                            <div>Diseño de identidad visual o branding.</div>
-                        </li>
-
-                    </ul>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =========================
-         SLIDE 2 — FOTO VIDEO
-    ========================= -->
-
-    <section class="slide" id="slide-2">
-
-        <div class="slide-container">
-
-            <div class="slide-header-bar">
-
-                <div class="slide-header-left">
-
-                    <div class="slide-number">
-                        2
-                    </div>
-
-                    <div>
-
-                        <div class="slide-header-title">
-                            Plan <span>Foto y Video</span>
-                        </div>
-
-                        <div class="slide-header-desc">
-                            Material visual propio y profesional para alimentar tus redes y campañas.
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="price-tag">
-                    $60.000 <small>/ mes</small>
-                </div>
-
-            </div>
-
-
-            <div class="card">
-
-                <div class="card-title">
-
-                    <div class="icon-circle">
-                        ✓
-                    </div>
-
-                    ¿Qué incluye?
-
-                </div>
-
-                <ul class="feature-list">
-
-                    <li>
-                        <span class="check-icon">✓</span>
-                        <div>
-                            <strong>Sesión mensual en el local</strong>:
-                            fotos y videos generales del espacio, productos o servicios.
-                        </div>
-                    </li>
-
-                    <li>
-                        <span class="check-icon">✓</span>
-                        <div>
-                            <strong>Material listo para redes</strong>:
-                            entregado en formatos optimizados.
-                        </div>
-                    </li>
-
-                    <li>
-                        <span class="check-icon">✓</span>
-                        <div>
-                            <strong>Segunda visita durante el mes</strong>:
-                            se contempla si se considera necesaria.
-                        </div>
-                    </li>
-
-                    <li>
-                        <span class="check-icon">✓</span>
-                        <div>
-                            <strong>Banco de material propio</strong>:
-                            contenido visual real de tu negocio.
-                        </div>
-                    </li>
-
-                </ul>
-
-            </div>
-
-
-            <div class="highlight-box warning">
-
-                <div class="highlight-box-title">
-                    ¿No necesitás esta sesión?
-                </div>
-
-                <p>
-                    Podés compartir tus propias fotos y videos y trabajamos sobre ese material sin costo adicional.
-                </p>
-
-            </div>
-
-
-            <div class="separator-note">
-                Este servicio es independiente. Podés contratarlo solo o sumarlo a cualquier otro plan.
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =========================
-         SLIDE 3 — META ADS 1
-    ========================= -->
-
-    <section class="slide" id="slide-3">
-
-        <div class="slide-container">
-
-            <div class="slide-header-bar">
-
-                <div class="slide-header-left">
-
-                    <div class="slide-number">
-                        3
-                    </div>
-
-                    <div>
-
-                        <div class="slide-header-title">
-                            Meta Ads <span>— 1 Campaña</span>
-                        </div>
-
-                        <div class="slide-header-desc">
-                            Una campaña publicitaria activa en Facebook e Instagram para atraer consultas reales.
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="price-tag">
-                    $200.000 <small>/ mes</small>
-                </div>
-
-            </div>
-
-
-            <div class="two-col">
-
-                <div class="card">
-
-                    <div class="card-title">
-                        <div class="icon-circle">✓</div>
-                        ¿Qué incluye?
-                    </div>
-
-                    <ul class="feature-list">
-
-                        <li>
-                            <span class="check-icon">✓</span>
-                            <div>
-                                <strong>Reunión estratégica</strong> para definir el objetivo.
-                            </div>
-                        </li>
-
-                        <li>
-                            <span class="check-icon">✓</span>
-                            <div>
-                                <strong>Desarrollo del creativo</strong>: placa, carrusel o video.
-                            </div>
-                        </li>
-
-                        <li>
-                            <span class="check-icon">✓</span>
-                            <div>
-                                <strong>Configuración completa</strong> de la campaña.
-                            </div>
-                        </li>
-
-                        <li>
-                            <span class="check-icon">✓</span>
-                            <div>
-                                <strong>Segmentación del público</strong> ideal.
-                            </div>
-                        </li>
-
-                        <li>
-                            <span class="check-icon">✓</span>
-                            <div>
-                                <strong>Optimización y ajustes</strong> durante el período.
-                            </div>
-                        </li>
-
-                        <li>
-                            <span class="check-icon">✓</span>
-                            <div>
-                                <strong>Informes y resultados</strong> con recomendaciones.
-                            </div>
-                        </li>
-
-                    </ul>
-
-                </div>
-
-
-                <div>
-
-                    <div class="card">
-
-                        <div class="card-title">
-
-                            <div class="icon-circle" style="background: rgba(255,68,68,0.08); color: var(--danger); border-color: rgba(255,68,68,0.2);">
-                                ×
-                            </div>
-
-                            No incluye
-
-                        </div>
-
-                        <ul class="feature-list">
-
-                            <li>
-                                <span class="cross-icon">×</span>
-                                <div>
-                                    El presupuesto publicitario.
-                                </div>
-                            </li>
-
-                        </ul>
-
-                    </div>
-
-
-                    <div class="highlight-box warning">
-
-                        <div class="highlight-box-title">
-                            Importante
-                        </div>
-
-                        <p>
-                            El presupuesto publicitario no está incluido. Lo define el cliente y se paga directamente a Meta.
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="separator-note">
-                Este servicio es independiente. No incluye gestión de redes ni producción de contenido.
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =========================
-         SLIDE 4 — META ADS 3
-    ========================= -->
-
-    <section class="slide" id="slide-4">
-
-        <div class="slide-container">
-
-            <div class="slide-header-bar">
-
-                <div class="slide-header-left">
-
-                    <div class="slide-number">
-                        4
-                    </div>
-
-                    <div>
-
-                        <div class="slide-header-title">
-                            Meta Ads <span>— Hasta 3 Campañas</span>
-                        </div>
-
-                        <div class="slide-header-desc">
-                            Hasta 3 campañas activas con seguimiento y optimización independiente.
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="price-tag">
-                    $450.000 <small>/ mes</small>
-                </div>
-
-            </div>
-
-
-            <div class="two-col">
-
-                <div class="card">
-
-                    <div class="card-title">
-
-                        <div class="icon-circle">
-                            ✓
-                        </div>
-
-                        ¿Qué incluye?
-
-                    </div>
-
-                    <ul class="feature-list">
-
-                        <li>
-                            <span class="check-icon">✓</span>
-                            <div>
-                                <strong>Reunión estratégica</strong> para cada campaña.
-                            </div>
-                        </li>
-
-                        <li>
-                            <span class="check-icon">✓</span>
-                            <div>
-                                <strong>Desarrollo de creativos</strong> para cada objetivo.
-                            </div>
-                        </li>
-
-                        <li>
-                            <span class="check-icon">✓</span>
-                            <div>
-                                <strong>Configuración completa</strong> de cada campaña.
-                            </div>
-                        </li>
-
-                        <li>
-                            <span class="check-icon">✓</span>
-                            <div>
-                                <strong>Segmentación del público</strong> específico.
-                            </div>
-                        </li>
-
-                        <li>
-                            <span class="check-icon">✓</span>
-                            <div>
-                                <strong>Optimización y ajustes</strong> constantes.
-                            </div>
-                        </li>
-
-                        <li>
-                            <span class="check-icon">✓</span>
-                            <div>
-                                <strong>Informes y resultados</strong> al finalizar la campaña.
-                            </div>
-                        </li>
-
-                    </ul>
-
-                </div>
-
-
-                <div>
-
-                    <div class="card">
-
-                        <div class="card-title">
-
-                            <div class="icon-circle" style="background: rgba(255,68,68,0.08); color: var(--danger); border-color: rgba(255,68,68,0.2);">
-                                ×
-                            </div>
-
-                            No incluye
-
-                        </div>
-
-                        <ul class="feature-list">
-
-                            <li>
-                                <span class="cross-icon">×</span>
-                                <div>
-                                    El presupuesto publicitario.
-                                </div>
-                            </li>
-
-                        </ul>
-
-                    </div>
-
-
-                    <div class="highlight-box warning">
-
-                        <div class="highlight-box-title">
-                            Sugerencia de inversión
-                        </div>
-
-                        <p>
-                            Recomendamos distribuir el presupuesto entre las campañas según los objetivos y la estrategia definida.
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="separator-note">
-                Este servicio es independiente. No incluye gestión de redes ni producción de contenido.
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =========================
-         SLIDE 5 — FUNCIONAMIENTO
-    ========================= -->
-
-    <section class="slide" id="slide-5">
-
-        <div class="slide-container">
-
-            <div class="section-center-title">
-
-                <div class="slide-header-title">
-                    Cómo funcionan los <span>servicios</span>
-                </div>
-
-                <p>
-                    Cada plan es un servicio aparte. Elegí el que necesites o combiná los que se adapten a tu negocio.
-                </p>
-
-            </div>
-
-
-            <div class="process-flow">
-
-                <div class="process-step">
-
-                    <div class="process-step-icon">
-                        1
-                    </div>
-
-                    <div class="process-step-label">
-                        Elegís los<br>servicios
-                    </div>
-
-                </div>
-
-                <div class="process-arrow" aria-hidden="true">→</div>
-
-                <div class="process-step">
-
-                    <div class="process-step-icon">
-                        2
-                    </div>
-
-                    <div class="process-step-label">
-                        Definimos<br>objetivos
-                    </div>
-
-                </div>
-
-                <div class="process-arrow" aria-hidden="true">→</div>
-
-                <div class="process-step">
-
-                    <div class="process-step-icon">
-                        3
-                    </div>
-
-                    <div class="process-step-label">
-                        Ejecutamos<br>el plan
-                    </div>
-
-                </div>
-
-                <div class="process-arrow" aria-hidden="true">→</div>
-
-                <div class="process-step">
-
-                    <div class="process-step-icon">
-                        4
-                    </div>
-
-                    <div class="process-step-label">
-                        Medimos y<br>optimizamos
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div
-                class="card"
-                style="background: rgba(0, 210, 211, 0.03); border-color: rgba(0, 210, 211, 0.15);"
-            >
-
-                <div class="card-title">
-
-                    <div class="icon-circle">
-                        !
-                    </div>
-
-                    Reglas claras
-
-                </div>
-
-                <ul class="feature-list">
-
-                    <li>
-                        <span class="check-icon">✓</span>
-                        <div>
-                            La <strong>inversión publicitaria</strong> nunca forma parte de mis honorarios.
-                        </div>
-                    </li>
-
-                    <li>
-                        <span class="check-icon">✓</span>
-                        <div>
-                            Los <strong>servicios son independientes</strong>: contratás solo lo que necesitás.
-                        </div>
-                    </li>
-
-                    <li>
-                        <span class="check-icon">✓</span>
-                        <div>
-                            Para <strong>foto y video</strong>, también podés enviarme tu propio material.
-                        </div>
-                    </li>
-
-                </ul>
-
-            </div>
-
-
-            <div class="card" style="margin-top: 24px;">
-
-                <div class="card-title" style="justify-content: center;">
-
-                    <div class="icon-circle">
-                        ★
-                    </div>
-
-                    Beneficios para tu negocio
-
-                </div>
-
-
-                <div class="benefits-grid">
-
-                    <!-- BENEFICIO 1 -->
-
-                    <div class="benefit-item">
-
-                        <div class="benefit-icon">
-
-                            <svg
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="1.8"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                aria-hidden="true"
-                            >
-                                <path d="M3 3v18h18"></path>
-                                <path d="M7 16l4-5 3 3 5-7"></path>
-                            </svg>
-
-                        </div>
-
-                        <div class="benefit-title">
-                            Más visibilidad
-                        </div>
-
-                        <div class="benefit-desc">
-                            Aparecés frente a las personas correctas.
-                        </div>
-
-                    </div>
-
-
-                    <!-- BENEFICIO 2 -->
-
-                    <div class="benefit-item">
-
-                        <div class="benefit-icon">
-
-                            <svg
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="1.8"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                aria-hidden="true"
-                            >
-                                <path d="M21 11.5a8.38 8.38 0 0 1-9 8.5 8.45 8.45 0 0 1-4-.95L3 21l1.95-4.7A8.45 8.45 0 0 1 4 12a8.5 8.5 0 0 1 8.5-8.5c4.7 0 8.5 3.6 8.5 8z"></path>
-                                <path d="M8 12h.01"></path>
-                                <path d="M12 12h.01"></path>
-                                <path d="M16 12h.01"></path>
-                            </svg>
-
-                        </div>
-
-                        <div class="benefit-title">
-                            Más consultas
-                        </div>
-
-                        <div class="benefit-desc">
-                            Interesados que realmente necesitan lo que ofrecés.
-                        </div>
-
-                    </div>
-
-
-                    <!-- BENEFICIO 3 -->
-
-                    <div class="benefit-item">
-
-                        <div class="benefit-icon">
-
-                            <svg
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="1.8"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                aria-hidden="true"
-                            >
-                                <path d="M12 3l7 4v5c0 4.8-3 7.9-7 9-4-1.1-7-4.2-7-9V7l7-4z"></path>
-                                <path d="M9 12l2 2 4-4"></path>
-                            </svg>
-
-                        </div>
-
-                        <div class="benefit-title">
-                            Más confianza
-                        </div>
-
-                        <div class="benefit-desc">
-                            Presencia profesional que transmite seriedad.
-                        </div>
-
-                    </div>
-
-
-                    <!-- BENEFICIO 4 -->
-
-                    <div class="benefit-item">
-
-                        <div class="benefit-icon">
-
-                            <svg
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="1.8"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                aria-hidden="true"
-                            >
-                                <path d="M3 17l6-6 4 4 8-8"></path>
-                                <path d="M15 7h6v6"></path>
-                            </svg>
-
-                        </div>
-
-                        <div class="benefit-title">
-                            Más resultados
-                        </div>
-
-                        <div class="benefit-desc">
-                            Cada peso invertido rinde más.
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =========================
-         SLIDE 6 — DISEÑO GRAFICO
-    ========================= -->
-
-    <section class="slide" id="slide-6">
-
-        <div class="slide-container">
-
-            <div class="section-center-title">
-
-                <div class="slide-header-title">
-                    También hacemos <span>diseño gráfico</span>
-                </div>
-
-                <p>
-                    Soluciones visuales para comunicar tu negocio, vender tus productos y fortalecer tu marca.
-                </p>
-
-            </div>
-
-
-            <div class="design-services">
-
-                <!-- 1 -->
-
-                <div class="design-service">
-
-                    <div class="design-service-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                            <path d="M12 20h9"></path>
-                            <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4Z"></path>
-                        </svg>
-                    </div>
-
-                    <div class="design-service-title">
-                        Diseño de piezas
-                    </div>
-
-                    <div class="design-service-text">
-                        Placas publicitarias, promociones, anuncios y piezas para redes.
-                    </div>
-
-                </div>
-
-
-                <!-- 2 -->
-
-                <div class="design-service">
-
-                    <div class="design-service-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                            <rect x="3" y="4" width="18" height="16" rx="2"></rect>
-                            <path d="M3 9h18"></path>
-                            <path d="M8 4v5"></path>
-                        </svg>
-                    </div>
-
-                    <div class="design-service-title">
-                        Banners
-                    </div>
-
-                    <div class="design-service-text">
-                        Banners para páginas web, tiendas online, promociones y campañas.
-                    </div>
-
-                </div>
-
-
-                <!-- 3 -->
-
-                <div class="design-service">
-
-                    <div class="design-service-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                            <path d="M4 4h16v16H4z"></path>
-                            <path d="M8 8h8"></path>
-                            <path d="M8 12h8"></path>
-                            <path d="M8 16h5"></path>
-                        </svg>
-                    </div>
-
-                    <div class="design-service-title">
-                        Catálogos
-                    </div>
-
-                    <div class="design-service-text">
-                        Catálogos digitales y de productos, organizados para mostrar y vender mejor.
-                    </div>
-
-                </div>
-
-
-                <!-- 4 -->
-
-                <div class="design-service">
-
-                    <div class="design-service-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                            <path d="M4 4h16v16H4z"></path>
-                            <path d="M8 8h8v8H8z"></path>
-                        </svg>
-                    </div>
-
-                    <div class="design-service-title">
-                        Cartelería
-                    </div>
-
-                    <div class="design-service-text">
-                        Carteles, señalética, vidrieras y piezas gráficas para tu local.
-                    </div>
-
-                </div>
-
-
-                <!-- 5 -->
-
-                <div class="design-service">
-
-                    <div class="design-service-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                            <path d="M6 2h12v20H6z"></path>
-                            <path d="M9 6h6"></path>
-                            <path d="M9 10h6"></path>
-                            <path d="M9 14h4"></path>
-                        </svg>
-                    </div>
-
-                    <div class="design-service-title">
-                        Folletería
-                    </div>
-
-                    <div class="design-service-text">
-                        Folletos, volantes, flyers, tarjetas y material para impresión.
-                    </div>
-
-                </div>
-
-
-                <!-- 6 -->
-
-                <div class="design-service">
-
-                    <div class="design-service-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                            <circle cx="12" cy="12" r="9"></circle>
-                            <path d="M12 7v10"></path>
-                            <path d="M7 12h10"></path>
-                        </svg>
-                    </div>
-
-                    <div class="design-service-title">
-                        Identidad de marca
-                    </div>
-
-                    <div class="design-service-text">
-                        Logos, identidad visual, colores, tipografías y sistemas gráficos.
-                    </div>
-
-                </div>
-
-
-                <!-- 7 -->
-
-                <div class="design-service">
-
-                    <div class="design-service-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                            <path d="M4 4h16v16H4z"></path>
-                            <path d="M8 8h8"></path>
-                            <path d="M8 12h8"></path>
-                            <path d="M8 16h8"></path>
-                        </svg>
-                    </div>
-
-                    <div class="design-service-title">
-                        Manual de marca
-                    </div>
-
-                    <div class="design-service-text">
-                        Documentación de uso de la identidad para mantener una comunicación consistente.
-                    </div>
-
-                </div>
-
-
-                <!-- 8 -->
-
-                <div class="design-service">
-
-                    <div class="design-service-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                            <rect x="3" y="3" width="18" height="18" rx="2"></rect>
-                            <circle cx="8" cy="8" r="1"></circle>
-                            <path d="M21 15l-5-5L5 21"></path>
-                        </svg>
-                    </div>
-
-                    <div class="design-service-title">
-                        Otros diseños
-                    </div>
-
-                    <div class="design-service-text">
-                        Si necesitás una pieza gráfica específica, la evaluamos y desarrollamos a medida.
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="design-footer">
-                Diseño pensado para que tu negocio se vea profesional en cualquier formato.
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =========================
-         SLIDE 7 — CIERRE
-    ========================= -->
-
-    <section class="slide closing-slide" id="slide-7">
-
-        <div class="slide-container">
-
-            <div class="closing-icon">
-
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-
-                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-
-                    <circle cx="9" cy="7" r="4"></circle>
-
-                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-
-                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-
-                </svg>
-
-            </div>
-
-
-            <div class="closing-title">
-                Trabajemos
-                <span style="color: var(--accent);">
-                    juntos
-                </span>
-            </div>
-
-
-            <div class="closing-text">
-                Elegí la combinación de servicios que se adapte a tu negocio y empecemos a generar resultados concretos.
-            </div>
-
-
-            <div class="closing-footer">
-
-                <div style="margin-bottom: 10px;">
-                    <strong>
-                        Estrategia, creatividad y resultados.
-                    </strong>
-                </div>
-
-                <div>
-                    Consultá por combos personalizados.
-                </div>
-
-            </div>
-
-
-            <div class="closing-cta">
-
-                <a
-                    href="https://wa.me/5492324630746"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Escribinos por WhatsApp"
-                >
-
-                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.247-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-                    </svg>
-
-                    Escribinos por WhatsApp
-
-                </a>
-
-            </div>
-
-
-            <div style="
-                margin-top: 40px;
-                font-family: 'Space Grotesk', sans-serif;
-                font-size: 11px;
-                text-transform: uppercase;
-                letter-spacing: 3px;
-                color: var(--text-muted);
-            ">
-                De la idea al impacto.
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =========================
+<div aria-hidden="true" class="deco-block turq a"></div>
+<div aria-hidden="true" class="deco-block beige b"></div>
+<div aria-hidden="true" class="deco-block turq c"></div>
+<header class="fixed-header">
+<a aria-label="Volver al inicio de MUTA" class="logo-header" href="#slide-0" onclick="scrollToSlide(0); return false;">
+<img alt="Logo MUTA" src="https://www.image2url.com/r2/default/images/1787771817769-53286863-4e16-433a-9c37-5c8d3158dfba.png"/>
+</a>
+<a aria-label="Escribinos por WhatsApp" class="whatsapp-btn" href="https://wa.me/5492324630746" rel="noopener noreferrer" target="_blank">
+<svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24">
+<path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.247-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path>
+</svg><span>Quiero saber más</span>
+</a>
+</header>
+<nav aria-label="Navegación de secciones" class="nav-dots">
+<button aria-current="true" aria-label="Ir a inicio" class="nav-dot active" onclick="scrollToSlide(0)"></button>
+<button aria-label="Ir a combos" class="nav-dot" onclick="scrollToSlide(1)"></button>
+<button aria-label="Ir a Presencia" class="nav-dot" onclick="scrollToSlide(2)"></button>
+<button aria-label="Ir a Foto y Video" class="nav-dot" onclick="scrollToSlide(3)"></button>
+<button aria-label="Ir a Meta Ads" class="nav-dot" onclick="scrollToSlide(4)"></button>
+<button aria-label="Ir a servicios complementarios" class="nav-dot" onclick="scrollToSlide(5)"></button>
+<button aria-label="Ir a funcionamiento" class="nav-dot" onclick="scrollToSlide(6)"></button>
+<button aria-label="Ir a diseño gráfico" class="nav-dot" onclick="scrollToSlide(7)"></button>
+<button aria-label="Ir al cierre" class="nav-dot" onclick="scrollToSlide(8)"></button>
+</nav>
+<section class="slide hero-slide" id="slide-0">
+<div class="slide-container">
+<div class="hero-claim">De la idea al impacto</div>
+<div class="hero-title">Existí en redes.<br/><span class="accent">Crecé en el mercado.</span></div>
+<div class="hero-subtitle">
+Estrategia, contenido y publicidad profesional para que tu negocio se vea mejor, comunique mejor y tenga más oportunidades de crecer.
+</div>
+<div class="pillars">
+<a class="pillar-card" href="#slide-1" onclick="scrollToSlide(1); return false;">
+<div class="pillar-icon"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24">
+<rect height="14" rx="2" width="20" x="2" y="3"></rect>
+<line x1="8" x2="16" y1="21" y2="21"></line>
+<line x1="12" x2="12" y1="17" y2="21"></line>
+</svg></div><div class="pillar-name">Combos MUTA</div><div class="pillar-desc">Más servicios, mejor valor.</div>
+</a>
+<a class="pillar-card" href="#slide-2" onclick="scrollToSlide(2); return false;">
+<div class="pillar-icon"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+<circle cx="12" cy="13" r="4"></circle>
+</svg></div><div class="pillar-name">Presencia</div><div class="pillar-desc">Una base profesional y constante.</div>
+</a>
+<a class="pillar-card" href="#slide-4" onclick="scrollToSlide(4); return false;">
+<div class="pillar-icon"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24">
+<circle cx="12" cy="12" r="10"></circle>
+<line x1="2" x2="22" y1="12" y2="12"></line>
+<path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+</svg></div><div class="pillar-name">Meta Ads</div><div class="pillar-desc">Campañas pensadas para generar consultas.</div>
+</a>
+</div>
+<div class="hero-footer">Podés empezar por una necesidad puntual y sumar servicios a medida que tu negocio los necesite.</div>
+<div aria-hidden="true" class="scroll-hint"><span>Desplazá para descubrir</span><svg fill="none" height="20" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="20"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+</div>
+</section>
+<section class="slide" id="slide-1">
+<div class="slide-container">
+<div class="section-center-title">
+<div class="slide-header-title">Elegí cómo <span>mutar</span></div>
+<p>Los combos están pensados para que obtengas más herramientas por una inversión menor que contratando cada servicio por separado.</p>
+</div>
+<div class="packages-grid">
+<article class="package-card">
+<div class="package-kicker">Entrada</div><div class="package-name">Presencia</div>
+<div class="package-desc">Para negocios que necesitan una comunicación profesional y constante sin complicarse.</div>
+<div class="package-price">$150.000 <small>/ mes</small></div><div class="package-saving"> </div>
+<ul class="package-list">
+<li>4 publicaciones mensuales</li><li>8 historias mensuales</li><li>Diseño alineado a tu marca</li><li>Calendario estratégico</li><li>Mantenimiento de perfil</li><li>Facebook si aplica</li>
+</ul><div class="package-note">Ideal para empezar y construir una base sólida.</div>
+<a class="package-cta" href="https://wa.me/5492324630746" target="_blank">Consultar</a>
+</article>
+<article class="package-card featured">
+<div class="package-badge">Más elegido</div><div class="package-kicker">Contenido</div><div class="package-name">MUTA Crece</div>
+<div class="package-desc">Presencia + producción visual para tener material propio y aprovechar mejor cada publicación.</div>
+<div class="package-price">$210.000 <small>/ mes</small></div><div class="package-saving"> · </div>
+<ul class="package-list">
+<li>Todo el Plan Presencia</li><li>Sesión mensual de foto y video</li><li>Banco de material propio</li><li>Material optimizado para redes</li><li>Contenido audiovisual para publicaciones y reels</li>
+</ul><div class="package-note">La producción se planifica para alimentar el contenido del mes.</div>
+<a class="package-cta" href="https://wa.me/5492324630746" target="_blank">Quiero este combo</a>
+</article>
+<article class="package-card">
+<div class="package-kicker">Crecimiento</div><div class="package-name">MUTA Growth</div>
+<div class="package-desc">Contenido + publicidad para negocios que ya están listos para buscar más consultas y oportunidades.</div>
+<div class="package-price">$390.000 <small>/ mes</small></div><div class="package-saving">Valor por separado: $410.000 · Ahorrás $20.000</div>
+<ul class="package-list">
+<li>Todo MUTA Crece</li><li>1 campaña Meta Ads activa</li><li>Creativo publicitario</li><li>Segmentación y configuración</li><li>Optimización y seguimiento</li><li>Informe con recomendaciones</li>
+</ul><div class="package-note">La inversión publicitaria se paga aparte directamente a Meta.</div>
+<a class="package-cta" href="https://wa.me/5492324630746" target="_blank">Quiero crecer</a>
+</article>
+</div>
+<div class="compare-box">
+<div><strong>¿Ya necesitás más de una campaña?</strong><br/><span style="color:var(--text-secondary);font-size:14px;">Podemos llevar MUTA Growth a un esquema de hasta 3 campañas según objetivos, presupuesto y capacidad comercial del negocio.</span></div>
+<div class="compare-price">$600.000 / mes</div>
+</div>
+<div class="separator-note">Los combos no obligan a contratar servicios innecesarios: se ajustan según el momento y objetivo de cada negocio.</div>
+</div>
+</section>
+<section class="slide" id="slide-2">
+<div class="slide-container">
+<div class="slide-header-bar"><div class="slide-header-left"><div class="slide-number">1</div><div><div class="slide-header-title">Plan <span>Presencia</span></div><div class="slide-header-desc">Una base profesional para mantener tus redes activas, coherentes y pensadas para tu negocio.</div></div></div><div class="price-tag">$150.000 <small>/ mes</small></div></div>
+<div class="two-col">
+<div class="card"><div class="card-title"><div class="icon-circle">✓</div>¿Qué incluye?</div><ul class="feature-list">
+<li><span class="check-icon">✓</span><div><strong>4 publicaciones mensuales</strong> en feed. Al menos 1 carrusel.</div></li>
+<li><span class="check-icon">✓</span><div><strong>8 historias mensuales</strong> con horarios, contacto, ubicación, ofertas o novedades.</div></li>
+<li><span class="check-icon">✓</span><div><strong>Diseño profesional</strong> alineado a tu marca.</div></li>
+<li><span class="check-icon">✓</span><div><strong>Calendario mensual</strong> de planificación estratégica.</div></li>
+<li><span class="check-icon">✓</span><div><strong>Mantenimiento del perfil</strong> e información relevante.</div></li>
+<li><span class="check-icon">✓</span><div><strong>Facebook si aplica</strong>: portada y gestión de la página.</div></li>
+</ul></div>
+<div class="card"><div class="card-title"><div class="icon-circle" style="background:rgba(255,68,68,.08);color:var(--danger);border-color:rgba(255,68,68,.2);">×</div>No incluye</div><ul class="feature-list">
+<li><span class="cross-icon">×</span><div>Gestión de campañas Meta Ads.</div></li>
+<li><span class="cross-icon">×</span><div>Producción fotográfica o audiovisual.</div></li>
+<li><span class="cross-icon">×</span><div>Respuesta de mensajes o atención al cliente.</div></li>
+<li><span class="cross-icon">×</span><div>Diseño de identidad visual o branding.</div></li>
+</ul></div>
+</div>
+<div class="highlight-box warning"><div class="highlight-box-title">¿Querés sumar contenido?</div><p>El salto natural es <strong>MUTA Crece por $210.000/mes</strong>: integrás producción audiovisual y estrategia de contenido mensual por solo $45.000 más.</p></div>
+</div>
+</section>
+<section class="slide" id="slide-3">
+<div class="slide-container">
+<div class="slide-header-bar"><div class="slide-header-left"><div class="slide-number">2</div><div><div class="slide-header-title">Foto <span>y Video</span></div><div class="slide-header-desc">Material visual propio para alimentar redes, reels y campañas.</div></div></div><div class="price-tag">$60.000 <small>/ mes</small></div></div>
+<div class="card"><div class="card-title"><div class="icon-circle">✓</div>¿Qué incluye?</div><ul class="feature-list">
+<li><span class="check-icon">✓</span><div><strong>Sesión mensual en el local</strong>: fotos y videos generales del espacio, productos o servicios.</div></li>
+<li><span class="check-icon">✓</span><div><strong>Material listo para redes</strong> en formatos optimizados.</div></li>
+<li><span class="check-icon">✓</span><div><strong>Segunda visita durante el mes</strong> si se considera necesaria.</div></li>
+<li><span class="check-icon">✓</span><div><strong>Banco de material propio</strong> para trabajar comunicación y campañas.</div></li>
+</ul></div>
+<div class="highlight-box warning"><div class="highlight-box-title">Mejor valor en combo</div><p> · MUTA Crece: $210.000 · . <strong>MUTA Crece cuesta $210.000</strong> e incorpora además contenido audiovisual dentro de la gestión.</p></div>
+<div class="highlight-box"><div class="highlight-box-title">¿No necesitás una sesión?</div><p>Podés compartir tus propias fotos y videos y trabajamos sobre ese material sin costo adicional.</p></div>
+</div>
+</section>
+<section class="slide" id="slide-4">
+<div class="slide-container">
+<div class="section-center-title"><div class="slide-header-title">Meta Ads: <span>publicidad que trabaja</span></div><p>La inversión publicitaria y mis honorarios son cosas distintas. Vos definís cuánto invertir en Meta; MUTA se ocupa de la estrategia, configuración, creatividades y optimización.</p></div>
+<div class="service-grid">
+<article class="service-mini"><div class="tag">1 objetivo</div><h3>1 campaña</h3><div class="mini-price">$200.000 / mes</div><p>Reunión estratégica, creativo, configuración, segmentación, optimización, seguimiento e informe.</p></article>
+<article class="service-mini"><div class="tag">2 objetivos</div><h3>Hasta 2 campañas</h3><div class="mini-price">$350.000 / mes</div><p>Dos campañas activas con objetivos diferenciados y seguimiento independiente.</p></article>
+<article class="service-mini"><div class="tag">3 objetivos</div><h3>Hasta 3 campañas</h3><div class="mini-price">$450.000 / mes</div><p>Hasta tres campañas activas para negocios con mayor necesidad de captación, promociones o segmentación.</p></article>
+</div>
+<div class="compare-box"><div><strong>Presupuesto publicitario</strong><br/><span style="color:var(--text-secondary);font-size:14px;">No está incluido en los honorarios. Se define según objetivo y se paga directamente a Meta.</span></div><div class="compare-price">Aparte</div></div>
+<div class="highlight-box warning"><div class="highlight-box-title">Importante</div><p>Más campañas no siempre significa mejores resultados. Primero definimos qué necesita realmente tu negocio y después asignamos presupuesto.</p></div>
+</div>
+</section>
+<section class="slide" id="slide-5">
+<div class="slide-container">
+<div class="section-center-title"><div class="slide-header-title">Servicios <span>complementarios</span></div><p>Si necesitás una solución puntual, también podemos trabajarla sin convertirla en una obligación mensual.</p></div>
+<div class="design-services">
+<div class="design-service"><div class="design-service-icon"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M12 20h9"></path>
+<path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4Z"></path>
+</svg></div><div class="design-service-title">Diseño de piezas</div><div class="design-service-text">Placas publicitarias, promociones, anuncios y piezas para redes. Se cotizan según cantidad y complejidad.</div></div>
+<div class="design-service"><div class="design-service-icon"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24">
+<rect height="16" rx="2" width="18" x="3" y="4"></rect>
+<path d="M3 9h18"></path>
+<path d="M8 4v5"></path>
+</svg></div><div class="design-service-title">Banners</div><div class="design-service-text">Banners para páginas web, tiendas online, promociones y campañas.</div></div>
+<div class="design-service"><div class="design-service-icon"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M4 4h16v16H4z"></path>
+<path d="M8 8h8"></path>
+<path d="M8 12h8"></path>
+<path d="M8 16h5"></path>
+</svg></div><div class="design-service-title">Catálogos</div><div class="design-service-text">Catálogos digitales y de productos, organizados para mostrar y vender mejor.</div></div>
+<div class="design-service"><div class="design-service-icon"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M4 4h16v16H4z"></path>
+<path d="M8 8h8v8H8z"></path>
+</svg></div><div class="design-service-title">Cartelería</div><div class="design-service-text">Carteles, señalética, vidrieras y piezas gráficas para tu local.</div></div>
+<div class="design-service"><div class="design-service-icon"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M6 2h12v20H6z"></path>
+<path d="M9 6h6"></path>
+<path d="M9 10h6"></path>
+<path d="M9 14h4"></path>
+</svg></div><div class="design-service-title">Folletería</div><div class="design-service-text">Folletos, volantes, flyers, tarjetas y material para impresión.</div></div>
+<div class="design-service"><div class="design-service-icon"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24">
+<circle cx="12" cy="12" r="9"></circle>
+<path d="M12 7v10"></path>
+<path d="M7 12h10"></path>
+</svg></div><div class="design-service-title">Identidad de marca</div><div class="design-service-text">Logos, identidad visual, colores, tipografías y sistemas gráficos.</div></div>
+<div class="design-service"><div class="design-service-icon"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M4 4h16v16H4z"></path>
+<path d="M8 8h8"></path>
+<path d="M8 12h8"></path>
+<path d="M8 16h8"></path>
+</svg></div><div class="design-service-title">Manual de marca</div><div class="design-service-text">Documentación de uso de la identidad para mantener una comunicación consistente.</div></div>
+<div class="design-service"><div class="design-service-icon"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24">
+<rect height="18" rx="2" width="18" x="3" y="3"></rect>
+<circle cx="8" cy="8" r="1"></circle>
+<path d="M21 15l-5-5L5 21"></path>
+</svg></div><div class="design-service-title">Otros diseños</div><div class="design-service-text">Si necesitás una pieza específica, la evaluamos y desarrollamos a medida.</div></div>
+</div>
+<div class="design-footer">Los trabajos de diseño gráfico fuera de los planes se cotizan según alcance. Para necesidades recurrentes podemos armar un paquete mensual.</div>
+</div>
+</section>
+<section class="slide" id="slide-6">
+<div class="slide-container">
+<div class="section-center-title"><div class="slide-header-title">Una relación que puede <span>crecer</span></div><p>No necesitás contratar todo desde el primer día. MUTA puede acompañar el crecimiento de tu negocio por etapas.</p></div>
+<div class="process-flow">
+<div class="process-step"><div class="process-step-icon">1</div><div class="process-step-label">Ordenamos<br/>tu presencia</div></div>
+<div class="process-arrow">→</div>
+<div class="process-step"><div class="process-step-icon">2</div><div class="process-step-label">Generamos<br/>contenido</div></div>
+<div class="process-arrow">→</div>
+<div class="process-step"><div class="process-step-icon">3</div><div class="process-step-label">Activamos<br/>publicidad</div></div>
+<div class="process-arrow">→</div>
+<div class="process-step"><div class="process-step-icon">4</div><div class="process-step-label">Medimos y<br/>optimizamos</div></div>
+</div>
+<div class="card"><div class="card-title"><div class="icon-circle">↑</div>Ejemplo de evolución</div><ul class="feature-list">
+<li><span class="check-icon">1</span><div><strong>Empezás con Presencia — $150.000.</strong> Construimos una comunicación constante.</div></li>
+<li><span class="check-icon">2</span><div><strong>Pasás a MUTA Crece — $210.000.</strong> Sumamos producción visual y más recursos de contenido.</div></li>
+<li><span class="check-icon">3</span><div><strong>Sumás publicidad.</strong> MUTA Growth queda en $390.000 con 1 campaña incluida.</div></li>
+<li><span class="check-icon">4</span><div><strong>Si el negocio lo necesita, escalamos.</strong> Hasta 2 o 3 campañas, con una propuesta específica.</div></li>
+</ul></div>
+<div class="highlight-box warning"><div class="highlight-box-title">La recomendación es estratégica</div><p>No te voy a recomendar un servicio solo porque exista. La combinación se define según el momento, el objetivo y la capacidad real de tu negocio para aprovecharla.</p></div>
+</div>
+</section>
+<section class="slide" id="slide-7">
+<div class="slide-container">
+<div class="section-center-title"><div class="slide-header-title">También hacemos <span>diseño gráfico</span></div><p>Soluciones visuales para comunicar tu negocio, vender tus productos y fortalecer tu marca.</p></div>
+<div class="benefits-grid">
+<div class="benefit-item"><div class="benefit-icon"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M3 3v18h18"></path>
+<path d="M7 16l4-5 3 3 5-7"></path>
+</svg></div><div class="benefit-title">Más visibilidad</div><div class="benefit-desc">Una presencia pensada para llegar a las personas correctas.</div></div>
+<div class="benefit-item"><div class="benefit-icon"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M21 11.5a8.38 8.38 0 0 1-9 8.5 8.45 8.45 0 0 1-4-.95L3 21l1.95-4.7A8.45 8.45 0 0 1 4 12a8.5 8.5 0 0 1 8.5-8.5c4.7 0 8.5 3.6 8.5 8z"></path>
+<path d="M8 12h.01"></path>
+<path d="M12 12h.01"></path>
+<path d="M16 12h.01"></path>
+</svg></div><div class="benefit-title">Más consultas</div><div class="benefit-desc">Contenido y campañas orientados a generar oportunidades.</div></div>
+<div class="benefit-item"><div class="benefit-icon"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M12 3l7 4v5c0 4.8-3 7.9-7 9-4-1.1-7-4.2-7-9V7l7-4z"></path>
+<path d="M9 12l2 2 4-4"></path>
+</svg></div><div class="benefit-title">Más confianza</div><div class="benefit-desc">Una comunicación profesional transmite seriedad.</div></div>
+<div class="benefit-item"><div class="benefit-icon"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M3 17l6-6 4 4 8-8"></path>
+<path d="M15 7h6v6"></path>
+</svg></div><div class="benefit-title">Más claridad</div><div class="benefit-desc">Cada acción responde a un objetivo concreto.</div></div>
+</div>
+<div class="card" style="margin-top:24px;background:rgba(0,210,211,.03);border-color:rgba(0,210,211,.15);">
+<div class="card-title"><div class="icon-circle">!</div>Reglas claras</div>
+<ul class="feature-list">
+<li><span class="check-icon">✓</span><div>La <strong>inversión publicitaria</strong> nunca forma parte de mis honorarios.</div></li>
+<li><span class="check-icon">✓</span><div>Los <strong>combos tienen precio preferencial</strong> frente a contratar cada servicio por separado.</div></li>
+<li><span class="check-icon">✓</span><div>Foto y video también puede trabajarse con <strong>material proporcionado por el cliente</strong>.</div></li>
+<li><span class="check-icon">✓</span><div>Los servicios se adaptan al negocio; no todos necesitan el mismo nivel de gestión.</div></li>
+</ul>
+</div>
+</div>
+</section>
+<section class="slide closing-slide" id="slide-8">
+<div class="slide-container">
+<div class="closing-icon"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></div>
+<div class="closing-title">Trabajemos <span style="color:var(--accent);">juntos</span></div>
+<div class="closing-text">Contame qué necesita hoy tu negocio y armamos la combinación adecuada. Podés empezar pequeño y escalar cuando tenga sentido.</div>
+<div class="closing-footer"><div style="margin-bottom:10px;"><strong>Estrategia, creatividad y resultados.</strong></div><div>Consultá por combos personalizados.</div></div>
+<div class="closing-cta"><a aria-label="Escribinos por WhatsApp" href="https://wa.me/5492324630746" rel="noopener noreferrer" target="_blank">
+<svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24">
+<path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.247-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path>
+</svg>
+Escribinos por WhatsApp</a></div>
+<div style="margin-top:40px;font-family:'Space Grotesk',sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:3px;color:var(--text-muted);">De la idea al impacto.</div>
+</div>
+</section>
+<!-- =========================
          JAVASCRIPT
     ========================= -->
-
-    <script>
+<script>
 
         const slides = document.querySelectorAll('.slide');
         const dots = document.querySelectorAll('.nav-dot');
@@ -3091,6 +2233,6 @@
         }
 
     </script>
-
+<p class="separator-note">Los servicios pueden contratarse por separado o integrarse en un plan según las necesidades del negocio.</p>
 </body>
 </html>
