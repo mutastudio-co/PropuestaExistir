@@ -2067,6 +2067,9 @@ Escribinos por WhatsApp</a></div>
     ========================= -->
 <script>
 
+        if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
+window.scrollTo(0, 0);
+        
         const slides = document.querySelectorAll('.slide');
         const dots = document.querySelectorAll('.nav-dot');
 
