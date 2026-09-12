@@ -483,22 +483,22 @@
            HERO
         ========================= */
 
-        .hero-slide {
-            text-align: center;
-            min-height: 100svh;
-            height: 100svh;
+      .hero-slide {
+    text-align: center;
+    min-height: 100svh;
+    height: 100svh;
 
-            /*
-             * Se agrega espacio superior adicional para que el centro
-             * visual del Hero quede por debajo del header fijo.
-             */
-            padding: calc(100px + (var(--header-height) / 2)) 24px 40px;
+    /*
+     * Se agrega espacio superior adicional para que el centro
+     * visual del Hero quede por debajo del header fijo.
+     */
+    padding: calc(var(--header-height) + 40px) 24px 40px;
 
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
 
         .hero-slide .slide-container {
             display: flex;
@@ -1203,16 +1203,16 @@
 
             /* HERO RESPONSIVE */
 
-            .hero-slide {
-                height: 100svh;
-                min-height: 100svh;
+           .hero-slide {
+    height: 100svh;
+    min-height: 100svh;
 
-                /*
-                 * Se mantiene el comportamiento original de mobile,
-                 * ya que visualmente funciona correctamente.
-                 */
-                padding: 82px 16px 45px;
-            }
+    /*
+     * Se mantiene el comportamiento original de mobile,
+     * ya que visualmente funciona correctamente.
+     */
+    padding: calc(var(--header-height) + 20px) 16px 45px;
+}
 
             .hero-slide .slide-container {
                 min-height: calc(100svh - 120px);
