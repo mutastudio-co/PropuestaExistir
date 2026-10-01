@@ -2350,7 +2350,7 @@ Escribinos por WhatsApp</a></div>
 
             entries.forEach(entry => {
 
-                if (entry.isIntersecting) {
+                if (entry.isIntersecting && (entry.intersectionRatio >= 0.4 || entry.intersectionRect.height >= window.innerHeight * 0.4)) {
 
                     entry.target.classList.add('visible');
 
@@ -2378,7 +2378,7 @@ Escribinos por WhatsApp</a></div>
             });
 
         }, {
-            threshold: 0.4
+            threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.8, 1]
         });
 
 
