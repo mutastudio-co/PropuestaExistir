@@ -10,10 +10,20 @@
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&amp;family=Inter:wght@400;500;600;700;800;900&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
 <script>
-/* Intro MUTA: se muestra una vez por sesión. Forzar con ?intro */
-(function(){var r=document.documentElement,s=true;
-try{s=!sessionStorage.getItem('mutaIntro')||/[?&]intro(=|&|$)/.test(location.search);}catch(e){}
-if(s)r.classList.add('intro-lock');})();
+/* Intro MUTA: cada carga o actualización arranca desde cero (animación + arriba de todo) */
+(function(){
+var d=document.documentElement;
+d.classList.add('intro-lock');
+try{history.scrollRestoration='manual';}catch(e){}
+try{if(location.hash)history.replaceState(null,'',location.pathname+location.search);}catch(e){}
+function top(){window.scrollTo(0,0);d.scrollTop=0;if(document.body)document.body.scrollTop=0;}
+top();
+window.addEventListener('DOMContentLoaded',top);
+window.addEventListener('load',function(){top();setTimeout(top,60);});
+window.addEventListener('pageshow',function(e){top();if(e.persisted)location.reload();});
+window.addEventListener('pagehide',top);
+window.addEventListener('beforeunload',top);
+})();
 </script>
 <noscript><style>#intro{display:none!important}html.intro-lock,html.intro-lock body{overflow:auto!important}</style></noscript>
 <style>
@@ -2565,7 +2575,6 @@ Escribinos por WhatsApp</a></div>
         if (closed) return;
         closed = true;
         timers.forEach(clearTimeout);
-        try { sessionStorage.setItem('mutaIntro', '1'); } catch (e) {}
         intro.classList.add('leaving');
         /* La propuesta reaparece mientras el telón sube */
         if (hero) {
@@ -2582,9 +2591,6 @@ Escribinos por WhatsApp</a></div>
 
     document.getElementById('introSkip').addEventListener('click', dismiss);
     document.getElementById('introGo').addEventListener('click', dismiss);
-    document.getElementById('introWa').addEventListener('click', function () {
-        try { sessionStorage.setItem('mutaIntro', '1'); } catch (e) {}
-    });
     window.addEventListener('keydown', function (e) {
         if (closed) return;
         if (e.key === 'Escape' || (ready && e.key === 'ArrowDown')) dismiss();
