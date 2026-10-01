@@ -9,6 +9,13 @@
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&amp;family=Inter:wght@400;500;600;700;800;900&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<script>
+/* Intro MUTA: se muestra una vez por sesión. Forzar con ?intro */
+(function(){var r=document.documentElement,s=true;
+try{s=!sessionStorage.getItem('mutaIntro')||/[?&]intro(=|&|$)/.test(location.search);}catch(e){}
+if(s)r.classList.add('intro-lock');})();
+</script>
+<noscript><style>#intro{display:none!important}html.intro-lock,html.intro-lock body{overflow:auto!important}</style></noscript>
 <style>
         :root {
             --bg: #050505;
@@ -483,22 +490,22 @@
            HERO
         ========================= */
 
-      .hero-slide {
-    text-align: center;
-    min-height: 100svh;
-    height: 100svh;
+        .hero-slide {
+            text-align: center;
+            min-height: 100svh;
+            height: 100svh;
 
-    /*
-     * Se agrega espacio superior adicional para que el centro
-     * visual del Hero quede por debajo del header fijo.
-     */
-    padding: calc(var(--header-height) + 200px) 24px 40px;
+            /*
+             * Se agrega espacio superior adicional para que el centro
+             * visual del Hero quede por debajo del header fijo.
+             */
+            padding: calc(100px + (var(--header-height) / 2)) 24px 40px;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-}
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
 
         .hero-slide .slide-container {
             display: flex;
@@ -972,10 +979,8 @@
         ========================= */
 
         .closing-slide {
-    text-align: center;
-    align-items: flex-start;
-    padding-top: 140px;
-}
+            text-align: center;
+        }
 
         .closing-icon {
             width: 80px;
@@ -1203,16 +1208,16 @@
 
             /* HERO RESPONSIVE */
 
-           .hero-slide {
-    height: 100svh;
-    min-height: 100svh;
+            .hero-slide {
+                height: 100svh;
+                min-height: 100svh;
 
-    /*
-     * Se mantiene el comportamiento original de mobile,
-     * ya que visualmente funciona correctamente.
-     */
-    padding: calc(var(--header-height) + 20px) 16px 45px;
-}
+                /*
+                 * Se mantiene el comportamiento original de mobile,
+                 * ya que visualmente funciona correctamente.
+                 */
+                padding: 82px 16px 45px;
+            }
 
             .hero-slide .slide-container {
                 min-height: calc(100svh - 120px);
@@ -1473,11 +1478,11 @@
 
             /* CIERRE */
 
-           .closing-slide {
-    min-height: 100svh;
-    align-items: flex-start;
-    padding: 110px 20px 60px;
-}
+            .closing-slide {
+                min-height: 100svh;
+                align-items: center;
+                padding: 90px 20px 60px;
+            }
 
             .closing-icon {
                 width: 70px;
@@ -1785,9 +1790,276 @@
             .compare-box { grid-template-columns:1fr; }
             .compare-price { white-space:normal; }
         }
+
+        /* =========================================================
+           INTRO MUTA — tarjeta -> web
+           Negro (frente) -> Cian (dorso) -> Negro (CTA) -> Propuesta
+        ========================================================= */
+
+        html.intro-lock, html.intro-lock body { overflow: hidden; height: 100%; }
+
+        #intro {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 5000;
+            background: #050505;
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+            transition: transform 0.9s cubic-bezier(0.77, 0, 0.18, 1);
+            will-change: transform;
+        }
+        html.intro-lock #intro { display: block; }
+        #intro.leaving { transform: translateY(-101%); }
+
+        #intro .wrap {
+            width: 100%;
+            max-width: 940px;
+            margin: 0 auto;
+            padding: 0 clamp(24px, 7vw, 56px);
+        }
+
+        #intro .stage {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .intro-skip {
+            position: absolute;
+            top: max(18px, env(safe-area-inset-top));
+            right: 18px;
+            z-index: 10;
+            appearance: none;
+            background: none;
+            border: 1px solid currentColor;
+            color: #fff;
+            opacity: 0.75;
+            font: 600 13px 'Space Grotesk', sans-serif;
+            letter-spacing: 0.04em;
+            padding: 10px 16px;
+            border-radius: 2px 12px 2px 12px;
+            cursor: pointer;
+            transition: opacity 0.2s, color 0.4s;
+        }
+        .intro-skip:hover { opacity: 1; }
+        #intro[data-stage="b"] .intro-skip { color: #050505; }
+        #intro[data-stage="c"] .intro-skip { color: #fff; }
+
+        /* ---------- ETAPA A: el problema ---------- */
+        .a-line {
+            font-weight: 800;
+            font-size: clamp(40px, 12vw, 128px);
+            line-height: 0.96;
+            white-space: nowrap;
+            letter-spacing: -0.045em;
+            margin: 0;
+        }
+        .a-static {
+            opacity: 0;
+            transform: translateY(14px);
+            transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .a-static.on { opacity: 1; transform: none; }
+        .a-slot { min-height: 1.1em; }
+        .a-word {
+            position: relative;
+            display: inline-block;
+            color: #6b6b6b;
+        }
+        .a-word::after {
+            content: "";
+            position: absolute;
+            left: -2%;
+            right: -2%;
+            top: 56%;
+            height: 0.09em;
+            background: #fff;
+            transform: scaleX(0);
+            transform-origin: left center;
+        }
+        .a-word.strike::after {
+            transform: scaleX(1);
+            transition: transform 0.16s cubic-bezier(0.7, 0, 0.3, 1);
+        }
+        .a-word.final {
+            color: var(--accent);
+            animation: introGlitch 0.42s steps(2, end) 1;
+            text-shadow: 0 0 60px rgba(0, 210, 211, 0.35);
+        }
+        .a-word.final::after { display: none; }
+        @keyframes introGlitch {
+            0%   { transform: translateX(-6px); text-shadow: 6px 0 #fff, -6px 0 rgba(0,210,211,.6); }
+            25%  { transform: translateX(7px) skewX(-6deg); text-shadow: -7px 0 #fff; }
+            50%  { transform: translateX(-3px); text-shadow: 3px 0 rgba(0,210,211,.8); }
+            75%  { transform: translateX(2px) skewX(3deg); }
+            100% { transform: none; }
+        }
+
+        /* ---------- ETAPA B: el dorso cian ---------- */
+        #introB {
+            background: var(--accent);
+            color: #fff;
+            clip-path: inset(100% 0 0 0);
+            transition: clip-path 0.55s cubic-bezier(0.77, 0, 0.18, 1);
+        }
+        #introB.on { clip-path: inset(0 0 0 0); }
+        .b-title {
+            margin: 0;
+            font-weight: 900;
+            font-size: clamp(54px, 17vw, 160px);
+            line-height: 0.92;
+            letter-spacing: -0.05em;
+        }
+        .b-mask { display: block; overflow: hidden; padding-bottom: 0.06em; }
+        .b-w {
+            display: inline-block;
+            transform: translateY(110%);
+            transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        #introB.on .b-mask:nth-child(1) .b-w { transform: none; transition-delay: 0.35s; }
+        #introB.on .b-mask:nth-child(2) .b-w { transform: none; transition-delay: 0.5s; }
+        .b-dot {
+            display: inline-block;
+            width: 0.15em;
+            height: 0.15em;
+            margin-left: 0.04em;
+            border-radius: 50%;
+            background: #050505;
+        }
+        #introB.pulse .b-dot { animation: dotPulse 0.5s ease-in forwards; }
+        @keyframes dotPulse { 0% { transform: scale(1); } 100% { transform: scale(1.8); } }
+
+        /* ---------- ETAPA C: la invitación ---------- */
+        #introC {
+            background: #050505;
+            clip-path: circle(0px at 50% 50%);
+        }
+        #introC .wrap > * {
+            opacity: 0;
+            transform: translateY(22px);
+            transition: opacity 0.7s ease, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        #introC.on .wrap > * { opacity: 1; transform: none; }
+        #introC.on .wrap > *:nth-child(1) { transition-delay: 0.45s; }
+        #introC.on .wrap > *:nth-child(2) { transition-delay: 0.6s; }
+        #introC.on .wrap > *:nth-child(3) { transition-delay: 0.85s; }
+        #introC.on .wrap > *:nth-child(4) { transition-delay: 1.05s; }
+        #introC.on .wrap > *:nth-child(5) { transition-delay: 1.3s; }
+        #introC.on .wrap > *:nth-child(6) { transition-delay: 1.6s; }
+        #introC.instant, #introC.instant .wrap > * { transition: none !important; }
+
+        .c-logo { display: block; height: 30px; width: auto; margin-bottom: clamp(28px, 6vh, 56px); }
+        .c-title {
+            margin: 0 0 clamp(18px, 3vh, 28px);
+            font-weight: 800;
+            font-size: clamp(42px, 12.5vw, 96px);
+            line-height: 0.98;
+            letter-spacing: -0.045em;
+        }
+        .c-text {
+            margin: 0;
+            font-size: clamp(18px, 4.6vw, 26px);
+            line-height: 1.35;
+            color: #d6d6d6;
+            max-width: 22em;
+        }
+        .c-text.hi {
+            margin-top: 6px;
+            color: var(--accent);
+            font-weight: 700;
+        }
+        .c-actions {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 14px 22px;
+            margin-top: clamp(28px, 5vh, 44px);
+        }
+        .c-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--accent);
+            color: #050505;
+            font: 700 15px 'Space Grotesk', sans-serif;
+            letter-spacing: 0.02em;
+            padding: 16px 28px;
+            border: 0;
+            border-radius: 2px 16px 2px 16px;
+            text-decoration: none;
+            cursor: pointer;
+            box-shadow: 0 0 28px rgba(0, 210, 211, 0.28);
+            transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+        }
+        .c-btn:hover { background: var(--accent-dark); transform: translateY(-2px); box-shadow: 0 0 38px rgba(0, 210, 211, 0.4); }
+        .c-btn svg { width: 20px; height: 20px; flex-shrink: 0; }
+        .c-link {
+            appearance: none;
+            background: none;
+            border: 0;
+            color: #fff;
+            font: 600 15px 'Space Grotesk', sans-serif;
+            padding: 12px 2px;
+            cursor: pointer;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+            transition: border-color 0.25s ease, color 0.25s ease;
+        }
+        .c-link:hover { color: var(--accent); border-color: var(--accent); }
+        .c-foot {
+            margin: clamp(32px, 7vh, 64px) 0 0;
+            font: 500 11px 'Space Grotesk', sans-serif;
+            letter-spacing: 0.22em;
+            color: var(--text-muted);
+        }
+
+        #intro :focus-visible { outline: 2px solid #fff; outline-offset: 4px; }
+        #introB :focus-visible, #intro[data-stage="b"] :focus-visible { outline-color: #050505; }
+
+        @media (prefers-reduced-motion: reduce) {
+            #intro, #intro * { animation: none !important; }
+        }
 </style>
 </head>
 <body>
+<!-- =========================
+     INTRO MUTA (tarjeta -> web)
+     ========================= -->
+<div id="intro" role="dialog" aria-modal="true" aria-label="Introducción MUTA Studio" data-stage="a">
+<button class="intro-skip" type="button" id="introSkip">Saltar</button>
+
+<div class="stage" id="introA" aria-hidden="true">
+<div class="wrap">
+<p class="a-line a-static" id="aStatic">Tu marca</p>
+<p class="a-line a-slot"><span class="a-word" id="aWord"></span></p>
+</div>
+</div>
+
+<div class="stage" id="introB" aria-hidden="true">
+<div class="wrap">
+<h2 class="b-title"><span class="b-mask"><span class="b-w">HACÉLA</span></span><span class="b-mask"><span class="b-w">CRECER<i class="b-dot" id="bDot"></i></span></span></h2>
+</div>
+</div>
+
+<div class="stage" id="introC">
+<div class="wrap">
+<img class="c-logo" alt="MUTA Studio" src="https://www.image2url.com/r2/default/images/1787771817769-53286863-4e16-433a-9c37-5c8d3158dfba.png" onerror="this.outerHTML='<strong class=&quot;c-logo&quot; style=&quot;font-size:28px;letter-spacing:-0.04em&quot;>muta.</strong>'"/>
+<h2 class="c-title">¿Tenés una marca?</h2>
+<p class="c-text">Mandame algo que estés haciendo actualmente.</p>
+<p class="c-text hi">Te devuelvo una idea.</p>
+<div class="c-actions">
+<a class="c-btn" id="introWa" href="https://wa.me/5492324630746?text=Hola%20MUTA%21%20Te%20paso%20lo%20que%20estoy%20haciendo%20con%20mi%20marca%20para%20que%20me%20devuelvan%20una%20idea." target="_blank" rel="noopener noreferrer"><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24">
+<path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.247-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path>
+</svg><span>Mandame algo</span></a>
+<button class="c-link" type="button" id="introGo">Ver la propuesta</button>
+</div>
+<p class="c-foot">REDES • PUBLICIDAD • DISEÑO</p>
+</div>
+</div>
+</div>
+
 <div aria-hidden="true" class="deco-block turq a"></div>
 <div aria-hidden="true" class="deco-block beige b"></div>
 <div aria-hidden="true" class="deco-block turq c"></div>
@@ -2046,20 +2318,7 @@ Estrategia, contenido y publicidad profesional para que tu negocio se vea mejor,
 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.247-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path>
 </svg>
 Escribinos por WhatsApp</a></div>
-<div style="margin-top:40px;display:flex;align-items:center;justify-content:center;gap:24px;flex-wrap:wrap;font-family:'Inter',sans-serif;font-size:14px;color:var(--text-secondary);">
-    <span style="display:inline-flex;align-items:center;gap:8px;">
-        <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent);flex-shrink:0;">
-            <path d="M4 4h16v16H4z"></path>
-            <path d="M22 6l-10 7L2 6"></path>
-        </svg>
-        mutastudio.co@gmail.com
-    </span>
-    <span style="display:inline-flex;align-items:center;gap:8px;">
-        <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent);flex-shrink:0;">
-            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"></path>
-        </svg>
-        +54 9 2324 63-0746
-    </span>
+<div style="margin-top:40px;font-family:'Space Grotesk',sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:3px;color:var(--text-muted);">De la idea al impacto.</div>
 </div>
 </section>
 <!-- =========================
@@ -2067,9 +2326,6 @@ Escribinos por WhatsApp</a></div>
     ========================= -->
 <script>
 
-        if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
-window.scrollTo(0, 0);
-        
         const slides = document.querySelectorAll('.slide');
         const dots = document.querySelectorAll('.nav-dot');
 
@@ -2249,5 +2505,108 @@ window.scrollTo(0, 0);
 
     </script>
 <p class="separator-note">Los servicios pueden contratarse por separado o integrarse en un plan según las necesidades del negocio.</p>
+
+<script>
+/* =========================================================
+   INTRO MUTA — secuencia (~5 s) y salida hacia la propuesta
+   ========================================================= */
+(function () {
+    var root = document.documentElement;
+    var intro = document.getElementById('intro');
+    if (!intro || !root.classList.contains('intro-lock')) return;
+
+    var sA = document.getElementById('aStatic');
+    var word = document.getElementById('aWord');
+    var sB = document.getElementById('introB');
+    var sC = document.getElementById('introC');
+    var dot = document.getElementById('bDot');
+    var hero = document.getElementById('slide-0');
+    var timers = [], ready = false, closed = false;
+
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var PHRASES = ['se repite.', 'se pierde.', 'pasa de largo.', 'no avanza.'];
+
+    function at(ms, fn) { timers.push(setTimeout(fn, ms)); }
+    function stage(s) { intro.setAttribute('data-stage', s); }
+
+    function showC(x, y) {
+        var r = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y)) + 40;
+        stage('c');
+        sC.style.clipPath = 'circle(0px at ' + x + 'px ' + y + 'px)';
+        void sC.offsetWidth;
+        sC.style.transition = 'clip-path 0.95s cubic-bezier(0.77, 0, 0.18, 1)';
+        sC.style.clipPath = 'circle(' + r + 'px at ' + x + 'px ' + y + 'px)';
+        sC.classList.add('on');
+        sC.removeAttribute('aria-hidden');
+        sB.removeAttribute('aria-hidden');
+        at(1700, function () { ready = true; });
+    }
+
+    function play() {
+        sA.classList.add('on');
+        PHRASES.forEach(function (p, i) {
+            var t = 700 + i * 380;
+            at(t, function () { word.className = 'a-word'; word.textContent = p; });
+            at(t + 190, function () { word.classList.add('strike'); });
+        });
+        at(700 + PHRASES.length * 380, function () {
+            word.className = 'a-word final';
+            word.textContent = 'cambia.';
+        });
+        at(3000, function () { stage('b'); sB.classList.add('on'); });
+        at(4350, function () { sB.classList.add('pulse'); });
+        at(4700, function () {
+            var b = dot.getBoundingClientRect();
+            showC(b.left + b.width / 2, b.top + b.height / 2);
+        });
+    }
+
+    function dismiss() {
+        if (closed) return;
+        closed = true;
+        timers.forEach(clearTimeout);
+        try { sessionStorage.setItem('mutaIntro', '1'); } catch (e) {}
+        intro.classList.add('leaving');
+        /* La propuesta reaparece mientras el telón sube */
+        if (hero) {
+            hero.classList.remove('visible');
+            void hero.offsetWidth;
+            setTimeout(function () { hero.classList.add('visible'); }, 350);
+        }
+        setTimeout(function () {
+            root.classList.remove('intro-lock');
+            intro.style.display = 'none';
+            window.scrollTo(0, 0);
+        }, 950);
+    }
+
+    document.getElementById('introSkip').addEventListener('click', dismiss);
+    document.getElementById('introGo').addEventListener('click', dismiss);
+    document.getElementById('introWa').addEventListener('click', function () {
+        try { sessionStorage.setItem('mutaIntro', '1'); } catch (e) {}
+    });
+    window.addEventListener('keydown', function (e) {
+        if (closed) return;
+        if (e.key === 'Escape' || (ready && e.key === 'ArrowDown')) dismiss();
+    });
+    intro.addEventListener('wheel', function (e) { if (ready && e.deltaY > 24) dismiss(); }, { passive: true });
+    var ty = null;
+    intro.addEventListener('touchstart', function (e) { ty = e.touches[0].clientY; }, { passive: true });
+    intro.addEventListener('touchmove', function (e) {
+        if (ready && ty !== null && ty - e.touches[0].clientY > 50) dismiss();
+    }, { passive: true });
+
+    if (reduce) {
+        /* Sin movimiento: se muestra directamente la invitación */
+        sC.classList.add('instant', 'on');
+        sC.style.clipPath = 'none';
+        sC.removeAttribute('aria-hidden');
+        stage('c');
+        ready = true;
+    } else {
+        play();
+    }
+})();
+</script>
 </body>
 </html>
