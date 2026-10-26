@@ -311,6 +311,35 @@ footer a{text-decoration:none}footer a:hover{color:var(--tq)}
 .wa{position:fixed;right:max(18px,env(safe-area-inset-right));bottom:max(18px,env(safe-area-inset-bottom));z-index:45;width:60px;height:60px;border-radius:50% 50% 50% 6px;background:var(--tq);color:var(--ink);display:grid;place-items:center;box-shadow:0 0 0 3px var(--ink),0 10px 30px -8px rgba(43,186,217,.8);transition:transform .25s}
 .wa:hover{transform:scale(1.08)}.wa svg{width:30px;height:30px}
 
+
+/* ===== INTRO: la marca muta ===== */
+.pre{display:none;position:fixed;inset:0;z-index:100;background:#efe9df;overflow:hidden;--k:1;transition:background .18s,transform calc(.95s*var(--k)) cubic-bezier(.75,0,.2,1),border-radius .4s}
+html.js .pre{display:grid;place-items:center}
+.pre.q{--k:.45}
+.pre.s1,.pre.s2{background:#070a0f}
+.pre.s3{background:var(--tq)}
+.pre.s4{background:var(--tq);transform:translateY(-101%);border-radius:0 0 50% 50%/0 0 14vh 14vh;pointer-events:none}
+.pt{position:relative;z-index:1;font:600 clamp(1.15rem,2.8vw,1.8rem)/1 var(--bd);letter-spacing:.03em;color:#8d867b;transition:color .18s,opacity .25s;white-space:nowrap}
+.pre.s1 .pt{color:#fff;text-shadow:2px 0 var(--tq),-2px 0 #ff4d6d;animation:jit .12s steps(2) infinite}
+.pre.s2 .pt{opacity:0}
+@keyframes jit{50%{transform:translateX(3px)}}
+.cu{display:inline-block;width:.1em;height:1.05em;background:currentColor;margin-left:.12em;vertical-align:-.16em;animation:bl 1s steps(2) infinite}
+.big{position:absolute;inset:0;display:grid;place-content:center;text-align:center;font:800 clamp(4.4rem,19.5vw,17rem)/.88 var(--hd);letter-spacing:-.05em;color:#fff;z-index:1;pointer-events:none;transition:color .3s}
+.big span{display:block;overflow:hidden;padding:.05em .08em .1em}
+.big b{display:block;font-weight:inherit;transform:translateY(108%)}
+.big .m i{display:inline-block;font-style:normal;color:var(--tq);transform-origin:50% 100%;transition:color .3s}
+.pre.s2 .big b,.pre.s3 .big b{transform:none;transition:transform calc(.75s*var(--k)) cubic-bezier(.2,.8,.2,1)}
+.pre.s2 .big span+span b,.pre.s3 .big span+span b{transition-delay:calc(.12s*var(--k))}
+.pre.s2 .m i{animation:sq calc(.8s*var(--k)) calc(.25s*var(--k) + var(--i)*70ms) both}
+@keyframes sq{0%{transform:scale(1)}35%{transform:scale(1.18,.55)}65%{transform:scale(.92,1.15)}100%{transform:none}}
+.pre.s3 .big{color:var(--ink)}.pre.s3 .m i{color:#fff}
+.tq{position:absolute;inset:0;background:var(--tq);clip-path:circle(0 at 82% 88%);z-index:0;transition:clip-path calc(.75s*var(--k)) cubic-bezier(.7,0,.2,1)}
+.pre.s3 .tq,.pre.s4 .tq{clip-path:circle(150% at 82% 88%)}
+.pg{position:absolute;z-index:2;left:50%;bottom:0;height:min(88vh,125vw);width:auto;max-width:none;transform:translate(-50%,104%);transition:transform calc(.85s*var(--k)) cubic-bezier(.2,.9,.2,1);filter:drop-shadow(0 20px 40px rgba(0,0,0,.35))}
+.pre.s3 .pg,.pre.s4 .pg{transform:translate(-50%,0);transition-delay:calc(.3s*var(--k))}
+.pk{position:absolute;z-index:4;right:5vw;bottom:4vh;background:none;border:1px solid #fff;color:#fff;mix-blend-mode:difference;font:500 .75rem var(--bd);letter-spacing:.2em;text-transform:uppercase;padding:.6rem 1.1rem;border-radius:999px 999px 999px 4px;cursor:pointer}
+@keyframes bl{50%{opacity:0}}
+
 /* reveal */
 html.js .rv{opacity:0;transform:translateY(30px);transition:opacity .8s,transform .8s;transition-delay:calc(var(--d,0)*90ms)}
 html.js .rv.in{opacity:1;transform:none}
@@ -324,6 +353,7 @@ html.js [data-split].in .w>span{transform:none}
 </style>
 </head>
 <body>
+<div class="pre" role="presentation"><div class="tq"></div><p class="pt"><span id="ptxt"></span><i class="cu"></i></p><h2 class="big" aria-hidden="true"><span><b>tu marca</b></span><span class="m"><b><i style="--i:0">m</i><i style="--i:1">u</i><i style="--i:2">t</i><i style="--i:3">a</i><i style="--i:4">.</i></b></span></h2><img class="pg" alt="" width="900" height="1200"><button type="button" class="pk" aria-label="Saltar intro">Saltar</button></div>
 <div class="bar"></div><div class="cur"></div>
 
 <nav><div class="wrap">
@@ -510,8 +540,22 @@ Q('.rv').forEach(function(e){var i=Array.prototype.indexOf.call(e.parentNode.chi
 /* contadores de precio */
 function count(el){var tn=el.firstChild;if(!tn||tn.nodeType!==3)return;var m=tn.textContent.match(/^([^\d]*)([\d.]+)(.*)$/);if(!m)return;var to=parseInt(m[2].replace(/\./g,''),10),t0=performance.now();
 (function f(now){var p=Math.min((now-t0)/1200,1),v=Math.round(to*(1-Math.pow(1-p,4)));tn.textContent=m[1]+v.toLocaleString('es-AR')+m[3];if(p<1)requestAnimationFrame(f)})(t0)}
-var io=new IntersectionObserver(function(es){es.forEach(function(x){if(!x.isIntersecting)return;var e=x.target;e.classList.add('in');if(e.matches('.plan .price,.tier .price')&&!RM)count(e);io.unobserve(e)})},{threshold:.15});
-Q('.rv,[data-split],.plan .price,.tier .price').forEach(function(e){io.observe(e)});
+function boot(){if(booted)return;booted=1;H.style.overflow='';var io=new IntersectionObserver(function(es){es.forEach(function(x){if(!x.isIntersecting)return;var e=x.target;e.classList.add('in');if(e.matches('.plan .price,.tier .price')&&!RM)count(e);io.unobserve(e)})},{threshold:.15});
+Q('.rv,[data-split],.plan .price,.tier .price').forEach(function(e){io.observe(e)})}
+/* intro */
+var booted=0,pre=D.querySelector('.pre');
+if(RM||!pre){if(pre)pre.remove();boot()}else{H.style.overflow='hidden';var seen=0;try{seen=sessionStorage.getItem('mutaIntro4')}catch(e){}
+if(seen)pre.classList.add('q');var K=seen?.45:1,fin=0,tm=[],tx=D.getElementById('ptxt'),A='una marca más.',B='tu marca muta.',POOL='▚▞#%&*+=?/\\01MUTA',hg=D.querySelector('.gk>img');
+if(hg)pre.querySelector('.pg').src=hg.src;
+function at(ms,fn){tm.push(setTimeout(fn,ms*K))}
+function st(c){pre.classList.remove('s1','s2','s3','s4');pre.classList.add(c)}
+A.split('').forEach(function(_,i){at(200+i*38,function(){tx.textContent=A.slice(0,i+1)})});
+at(1000,function(){st('s1');var n=10;for(var j=1;j<=n;j++)(function(j){setTimeout(function(){var o='';for(var c=0;c<B.length;c++){var d=c/B.length*.7+.25;o+=(j/n>=d||B[c]===' '||B[c]==='.')?B[c]:POOL[Math.floor(Math.random()*POOL.length)]}tx.textContent=o},j*45*K)})(j)});
+at(1550,function(){st('s2');tx.textContent=B});
+at(2250,function(){st('s3')});
+at(3050,finish);
+function finish(){if(fin)return;fin=1;tm.forEach(clearTimeout);st('s4');boot();try{sessionStorage.setItem('mutaIntro4','1')}catch(e){}setTimeout(function(){pre.remove()},1100)}
+pre.querySelector('.pk').addEventListener('click',finish);setTimeout(boot,6000)}
 /* menú */
 var bg=D.querySelector('.burger'),mn=D.getElementById('menu');
 function closeMenu(){mn.classList.remove('open');bg.setAttribute('aria-expanded','false')}
