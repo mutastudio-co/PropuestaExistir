@@ -315,30 +315,30 @@ footer a{text-decoration:none}footer a:hover{color:var(--tq)}
 /* ===== INTRO: la marca muta ===== */
 .pre{display:none;position:fixed;inset:0;z-index:100;background:#efe9df;overflow:hidden;--k:1;transition:background .18s,transform calc(.95s*var(--k)) cubic-bezier(.75,0,.2,1),border-radius .4s}
 html.js .pre{display:grid;place-items:center}
-.pre.q{--k:.45}
 .pre.s1,.pre.s2{background:#070a0f}
 .pre.s3{background:var(--tq)}
 .pre.s4{background:var(--tq);transform:translateY(-101%);border-radius:0 0 50% 50%/0 0 14vh 14vh;pointer-events:none}
 .pt{position:relative;z-index:1;font:600 clamp(1.15rem,2.8vw,1.8rem)/1 var(--bd);letter-spacing:.03em;color:#8d867b;transition:color .18s,opacity .25s;white-space:nowrap}
 .pre.s1 .pt{color:#fff;text-shadow:2px 0 var(--tq),-2px 0 #ff4d6d;animation:jit .12s steps(2) infinite}
-.pre.s2 .pt{opacity:0}
+.pre.s2 .pt,.pre.s3 .pt,.pre.s4 .pt{opacity:0}
 @keyframes jit{50%{transform:translateX(3px)}}
 .cu{display:inline-block;width:.1em;height:1.05em;background:currentColor;margin-left:.12em;vertical-align:-.16em;animation:bl 1s steps(2) infinite}
 .big{position:absolute;inset:0;display:grid;place-content:center;text-align:center;font:800 clamp(4.4rem,19.5vw,17rem)/.88 var(--hd);letter-spacing:-.05em;color:#fff;z-index:1;pointer-events:none;transition:color .3s}
 .big span{display:block;overflow:hidden;padding:.05em .08em .1em}
 .big b{display:block;font-weight:inherit;transform:translateY(108%)}
 .big .m i{display:inline-block;font-style:normal;color:var(--tq);transform-origin:50% 100%;transition:color .3s}
-.pre.s2 .big b,.pre.s3 .big b{transform:none;transition:transform calc(.75s*var(--k)) cubic-bezier(.2,.8,.2,1)}
-.pre.s2 .big span+span b,.pre.s3 .big span+span b{transition-delay:calc(.12s*var(--k))}
-.pre.s2 .m i{animation:sq calc(.8s*var(--k)) calc(.25s*var(--k) + var(--i)*70ms) both}
+.pre.s2 .big b,.pre.s3 .big b,.pre.s4 .big b{transform:none;transition:transform calc(.75s*var(--k)) cubic-bezier(.2,.8,.2,1)}
+.pre.s2 .big span+span b,.pre.s3 .big span+span b,.pre.s4 .big span+span b{transition-delay:calc(.12s*var(--k))}
+.pre.s2 .m i,.pre.s3 .m i{animation:sq calc(.8s*var(--k)) calc(.25s*var(--k) + var(--i)*70ms) both}
 @keyframes sq{0%{transform:scale(1)}35%{transform:scale(1.18,.55)}65%{transform:scale(.92,1.15)}100%{transform:none}}
-.pre.s3 .big{color:var(--ink)}.pre.s3 .m i{color:#fff}
+.pre.s3 .big,.pre.s4 .big{color:var(--ink)}.pre.s3 .m i,.pre.s4 .m i{color:#fff}
 .tq{position:absolute;inset:0;background:var(--tq);clip-path:circle(0 at 82% 88%);z-index:0;transition:clip-path calc(.75s*var(--k)) cubic-bezier(.7,0,.2,1)}
 .pre.s3 .tq,.pre.s4 .tq{clip-path:circle(150% at 82% 88%)}
-.pg{position:absolute;z-index:2;left:50%;bottom:0;height:min(88vh,125vw);width:auto;max-width:none;transform:translate(-50%,104%);transition:transform calc(.85s*var(--k)) cubic-bezier(.2,.9,.2,1);filter:drop-shadow(0 20px 40px rgba(0,0,0,.35))}
+.pg{position:absolute;z-index:2;left:50%;bottom:0;height:min(88vh,125vw);width:auto;max-width:none;transform:translate(-50%,104%);will-change:transform;transition:transform calc(.85s*var(--k)) cubic-bezier(.2,.9,.2,1);filter:drop-shadow(0 20px 40px rgba(0,0,0,.35))}
 .pre.s3 .pg,.pre.s4 .pg{transform:translate(-50%,0);transition-delay:calc(.3s*var(--k))}
 .pk{position:absolute;z-index:4;right:5vw;bottom:4vh;background:none;border:1px solid #fff;color:#fff;mix-blend-mode:difference;font:500 .75rem var(--bd);letter-spacing:.2em;text-transform:uppercase;padding:.6rem 1.1rem;border-radius:999px 999px 999px 4px;cursor:pointer}
 @keyframes bl{50%{opacity:0}}
+html.intro .hero:before,html.intro .chip,html.intro .mt,html.intro .pp .hd,html.intro .pp .hn{animation-play-state:paused}
 
 /* reveal */
 html.js .rv{opacity:0;transform:translateY(30px);transition:opacity .8s,transform .8s;transition-delay:calc(var(--d,0)*90ms)}
@@ -544,18 +544,47 @@ function boot(){if(booted)return;booted=1;H.style.overflow='';var io=new Interse
 Q('.rv,[data-split],.plan .price,.tier .price').forEach(function(e){io.observe(e)})}
 /* intro */
 var booted=0,pre=D.querySelector('.pre');
-if(RM||!pre){if(pre)pre.remove();boot()}else{H.style.overflow='hidden';var seen=0;try{seen=sessionStorage.getItem('mutaIntro4')}catch(e){}
-if(seen)pre.classList.add('q');var K=seen?.45:1,fin=0,tm=[],tx=D.getElementById('ptxt'),A='una marca más.',B='tu marca muta.',POOL='▚▞#%&*+=?/\\01MUTA',hg=D.querySelector('.gk>img');
-if(hg)pre.querySelector('.pg').src=hg.src;
-function at(ms,fn){tm.push(setTimeout(fn,ms*K))}
+if(RM||!pre){if(pre)pre.remove();boot()}else{
+/* Tiempos de la intro (ms). Para acelerar o enlentecer, tocá solo estos valores. */
+var T={
+  lead:150,    /* pausa con el cursor titilando antes de empezar a escribir */
+  type:38,     /* ms por letra de "una marca más." */
+  read:550,    /* pausa para poder leer "una marca más." completa */
+  glitch:480,  /* duración del efecto glitch/decode */
+  settle:120,  /* "tu marca muta." quieta antes de agrandarse */
+  words:950,   /* "tu marca muta." en grande (incluye el squash de "muta.") */
+  geko:1500,   /* turquesa + geko entrando + pausa antes de que suba la cortina */
+  wait:1500    /* espera máxima por fuentes/imagen antes de arrancar igual */
+};
+H.style.overflow='hidden';H.classList.add('intro');
+var fin=0,armed=0,tm=0,raf=0,cap=0,tx=D.getElementById('ptxt'),pg=pre.querySelector('.pg'),hg=D.querySelector('.gk>img'),
+A='una marca más.',B='tu marca muta.',POOL='▚▞#%&*+=?/\\01MUTA';
 function st(c){pre.classList.remove('s1','s2','s3','s4');pre.classList.add(c)}
-A.split('').forEach(function(_,i){at(200+i*38,function(){tx.textContent=A.slice(0,i+1)})});
-at(1000,function(){st('s1');var n=10;for(var j=1;j<=n;j++)(function(j){setTimeout(function(){var o='';for(var c=0;c<B.length;c++){var d=c/B.length*.7+.25;o+=(j/n>=d||B[c]===' '||B[c]==='.')?B[c]:POOL[Math.floor(Math.random()*POOL.length)]}tx.textContent=o},j*45*K)})(j)});
-at(1550,function(){st('s2');tx.textContent=B});
-at(2250,function(){st('s3')});
-at(3050,finish);
-function finish(){if(fin)return;fin=1;tm.forEach(clearTimeout);st('s4');boot();try{sessionStorage.setItem('mutaIntro4','1')}catch(e){}setTimeout(function(){pre.remove()},1100)}
-pre.querySelector('.pk').addEventListener('click',finish);setTimeout(boot,6000)}
+/* Cada paso se encadena al anterior: si el navegador se tilda un instante, la intro
+   se corre hacia adelante en vez de comprimir las etapas (así nunca "va todo muy rápido"). */
+function wait(ms,fn){tm=setTimeout(function(){if(!fin)fn()},ms)}
+function tween(ms,step,done){var t0=performance.now();(function f(now){if(fin)return;var p=Math.min(Math.max((now-t0)/ms,0),1);step(p);if(p<1)raf=requestAnimationFrame(f);else if(done)done()})(t0)}
+function play(){if(fin)return;
+wait(T.lead,function(){var shown=-1;
+tween(A.length*T.type,function(p){var n=Math.ceil(p*A.length);if(n!==shown){shown=n;tx.textContent=A.slice(0,n)}},function(){
+wait(T.read,function(){st('s1');var last=-1,N=12;
+tween(T.glitch,function(p){var s=Math.floor(p*N);if(s===last)return;last=s;var o='';for(var c=0;c<B.length;c++){var d=c/B.length*.7+.25;o+=(p>=d||B[c]===' '||B[c]==='.')?B[c]:POOL[Math.floor(Math.random()*POOL.length)]}tx.textContent=o},function(){
+tx.textContent=B;
+wait(T.settle,function(){st('s2');wait(T.words,function(){st('s3');wait(T.geko,finish)})})})})})})}
+/* No arranca hasta que la tipografía y la imagen del geko estén listas (o hasta T.wait como tope) */
+function start(){if(armed)return;armed=1;clearTimeout(cap);requestAnimationFrame(function(){requestAnimationFrame(play)})}
+function safe(p){return p&&p.catch?p.catch(function(){}):p}
+var jobs=[];
+if(hg&&hg.src){pg.src=hg.src;if(pg.decode)jobs.push(safe(pg.decode()))}
+if(D.fonts&&D.fonts.load){jobs.push(safe(D.fonts.load('800 1em Outfit',B)),safe(D.fonts.load('600 1em Inter',A)))}
+cap=setTimeout(start,T.wait);
+if(window.Promise&&jobs.length)Promise.all(jobs).then(start);else start();
+function finish(){if(fin)return;fin=1;clearTimeout(tm);clearTimeout(cap);cancelAnimationFrame(raf);st('s4');H.classList.remove('intro');setTimeout(boot,350);setTimeout(function(){pre.remove()},1150)}
+pre.querySelector('.pk').addEventListener('click',finish);
+addEventListener('keydown',function(e){if(e.key==='Escape')finish()});
+pre.addEventListener('touchmove',function(e){e.preventDefault()},{passive:false});
+pre.addEventListener('wheel',function(e){e.preventDefault()},{passive:false});
+setTimeout(boot,9000)}
 /* menú */
 var bg=D.querySelector('.burger'),mn=D.getElementById('menu');
 function closeMenu(){mn.classList.remove('open');bg.setAttribute('aria-expanded','false')}
